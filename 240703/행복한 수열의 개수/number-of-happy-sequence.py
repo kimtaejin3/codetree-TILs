@@ -2,18 +2,17 @@
 # 다 완성은 했지만 더 나은 해결책이 있으려나
 def isHappySequence(datas,m):
     
-    consecutive_count = 1
-    for i in range(1,len(datas)):
-
-        if datas[i-1] == datas[i]:
+    consecutive_count, max_ccnt = 1, 1
+    for i in range(1, n):
+        if seq[i - 1] == seq[i]:
             consecutive_count += 1
-            if consecutive_count >= m:
-                return True
         else:
             consecutive_count = 1
         
-
-    return False
+        max_ccnt = max(max_ccnt, consecutive_count)
+    
+    # 최대로 연속한 회수가 m이상이면 true를 반환합니다. 
+    return max_ccnt >= m
 
 n,m = map(int,input().split())
 
