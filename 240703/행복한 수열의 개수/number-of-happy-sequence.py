@@ -43,7 +43,6 @@ for i in range(n):
     if isHappySequence(tempArr,m):
         ans += 1
 
-print(ans)
 print(isHappySequence([1,1,2,3,4,1,1,1],3))
 
 # -- 기록 --
