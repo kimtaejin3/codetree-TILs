@@ -7,7 +7,7 @@ def isHappySequence(datas,m):
         cnt = 0
         lastPosition = -1 
         for j in range(len(datas)):
-            if (target == datas[j] and (j-lastPosition == 1 or lastPosition == -1)):
+            if (target == datas[j] and (abs(j-lastPosition) == 1 or lastPosition == -1)):
                 cnt += 1
                 lastPosition = j
         
