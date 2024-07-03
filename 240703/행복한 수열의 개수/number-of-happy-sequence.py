@@ -4,7 +4,7 @@ def isHappySequence(datas,m):
     
     consecutive_count, max_ccnt = 1, 1
     for i in range(1, n):
-        if seq[i - 1] == seq[i]:
+        if datas[i - 1] == datas[i]:
             consecutive_count += 1
         else:
             consecutive_count = 1
