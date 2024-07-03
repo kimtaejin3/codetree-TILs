@@ -10,12 +10,15 @@ def isHappySequence(datas,m):
             if (target == datas[j] and (abs(j-lastPosition) == 1 or lastPosition == -1)):
                 cnt += 1
                 lastPosition = j
+
+                if cnt >= m:
+                    return True
             else:
                 cnt = 0
                 lastPosition = -1 
         
-        if cnt >= m:
-            return True
+        # if cnt >= m:
+            # return True
 
     return False
 
