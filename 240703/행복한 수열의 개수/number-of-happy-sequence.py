@@ -10,8 +10,9 @@ def isHappySequence(datas,m):
             if (target == datas[j] and (abs(j-lastPosition) == 1 or lastPosition == -1)):
                 cnt += 1
                 lastPosition = j
-            elif target == datas[j]:
+            else:
                 cnt = 0
+                lastPosition = -1 
         
         if cnt >= m:
             return True
@@ -43,6 +44,8 @@ for i in range(n):
         ans += 1
 
 print(ans)
+print(isHappySequence([1,1,2,3,4,1,1,1],3))
 
 # -- 기록 --
-# 틀렸는데 아마 isHappySequence에 문제가 있지 않을까
+# 틀렸는데 아마 isHappySequence에 문제가 있지 않을까 
+# 논리적인 흐름을 잘 따라가면 틀릴 건 없는듯(?)
