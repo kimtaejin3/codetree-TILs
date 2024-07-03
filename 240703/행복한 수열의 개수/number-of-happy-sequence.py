@@ -7,11 +7,11 @@ def isHappySequence(datas,m):
 
         if datas[i-1] == datas[i]:
             consecutive_count += 1
+            if consecutive_count >= m:
+                return True
         else:
             consecutive_count = 1
         
-        if consecutive_count >= m:
-            return True
 
     return False
 
