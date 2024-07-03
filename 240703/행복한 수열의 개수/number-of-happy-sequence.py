@@ -2,23 +2,16 @@
 # 다 완성은 했지만 더 나은 해결책이 있으려나
 def isHappySequence(datas,m):
     
-    for i in range(len(datas)):
-        target = datas[i]
-        cnt = 0
-        lastPosition = -1 
-        for j in range(len(datas)):
-            if (target == datas[j] and (abs(j-lastPosition) == 1 or lastPosition == -1)):
-                cnt += 1
-                lastPosition = j
+    consecutive_count = 1
+    for i in range(1,len(datas)):
 
-                if cnt >= m:
-                    return True
-            else:
-                cnt = 0
-                lastPosition = -1 
+        if datas[i-1] == datas[i]:
+            consecutive_count += 1
+        else:
+            consecutive_count = 1
         
-        # if cnt >= m:
-            # return True
+        if consecutive_count >= m:
+            return True
 
     return False
 
