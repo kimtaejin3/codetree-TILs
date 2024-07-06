@@ -57,8 +57,8 @@ for x in range(n):
         # block 2
         for d in range(2):
             temp = 0
-            for k in range(x, x+2):
-                for l in range(y, y+2):
+            for k in range(x, x+3):
+                for l in range(y, y+3):
                     if k > n - 1 or k < 0 or l > m - 1 or l < 0: 
                         continue
                     temp += arr[k][l] * block02[d][k-x][l-y]
