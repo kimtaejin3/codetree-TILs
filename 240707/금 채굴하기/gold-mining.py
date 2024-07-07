@@ -28,9 +28,8 @@ def generateMiningArea(k):
 
 ans = -1
 
-for s in range(1,n):
+for s in range(n):
     mining_area = generateMiningArea(s)
-
     center_x = n // 2
     center_y = n // 2
 
@@ -49,5 +48,4 @@ for s in range(1,n):
             if s * s + (s+1) * (s+1) <= m * temp:
                 ans = max(ans, temp)
             
-
 print(ans)
