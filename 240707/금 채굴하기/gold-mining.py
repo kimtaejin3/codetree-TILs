@@ -35,16 +35,17 @@ for s in range(n):
 
     for x in range(n):
         for y in range(n):
-            diff_x = abs(x-center_x)
-            diff_y = abs(y-center_y)
+            diff_x = center_x
+            diff_y = center_y
             temp = 0
             for i in range(x-diff_x, x-diff_x+n):
                 for j in range(y-diff_y, y-diff_y+n):
                     if i<0 or i>n-1 or j<0 or j>n-1:
                         continue
                     
-                    temp += mining_area[i-x+diff_x][j-y+diff_y] * arr[i][j]
-                 
+                    temp += mining_area[i+diff_x-x][j+diff_y-y] * arr[i][j]
+
+            # print(s * s + (s+1) * (s+1),temp)
             if s * s + (s+1) * (s+1) <= m * temp:
                 ans = max(ans, temp)
             
