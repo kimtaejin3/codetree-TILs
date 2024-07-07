@@ -26,7 +26,7 @@ def generateMiningArea(k):
 
     return mining_area
 
-ans = -1
+ans = 0
 
 for s in range(n):
     mining_area = generateMiningArea(s)
