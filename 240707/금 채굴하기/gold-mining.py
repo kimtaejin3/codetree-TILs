@@ -35,15 +35,13 @@ for s in range(n):
 
     for x in range(n):
         for y in range(n):
-            diff_x = center_x
-            diff_y = center_y
             temp = 0
-            for i in range(x-diff_x, x-diff_x+n):
-                for j in range(y-diff_y, y-diff_y+n):
+            for i in range(x-center_x, x-center_x+n):
+                for j in range(y-center_y, y-center_y+n):
                     if i<0 or i>n-1 or j<0 or j>n-1:
                         continue
                     
-                    temp += mining_area[i+diff_x-x][j+diff_y-y] * arr[i][j]
+                    temp += mining_area[i+center_x-x][j+center_y-y] * arr[i][j]
 
             # print(s * s + (s+1) * (s+1),temp)
             if s * s + (s+1) * (s+1) <= m * temp:
