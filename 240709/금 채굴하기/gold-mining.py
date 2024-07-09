@@ -8,21 +8,14 @@
 
 # 채굴액자를 n * n 으로 만들어 놓기 -> 왜? 일단 배열은 만들어 놓아야 하니 그 틀을 최대 기준으로 잡는 것임
 
+# 63%에서 틀림 -> mining area의 center position을 어떻게 잡아야 할지가 이슈
 n,m = map(int,input().split())
 
 arr = [list(map(int,input().split())) for _ in range(n)]
 
-def generateMiningArea(k):
+def generateMiningArea(k, center_x, center_y):
     mining_area = [[0] * n for _ in range(n)]
     
-    center_x = n // 2 
-    center_y = n // 2
-    
-    if n%2 == 0:
-        center_x -= 1
-        center_y -= 1
-   
-
     mining_area[center_x][center_y] = 1
 
     for x in range(n):
@@ -35,21 +28,31 @@ def generateMiningArea(k):
 ans = 0
 
 for k in range(n):
-    mining_area = generateMiningArea(k)
-    center_x = n // 2
-    center_y = n // 2
+    for center_x in range(n):
+        for center_y in range(n):
 
-    for x in range(n):
-        for y in range(n):
-            temp = 0
-            for i in range(x-center_x, x-center_x+n):
-                for j in range(y-center_y, y-center_y+n):
-                    if i<0 or i>n-1 or j<0 or j>n-1:
-                        continue
-                    
-                    temp += mining_area[i+center_x-x][j+center_y-y] * arr[i][j]
+            mining_area = generateMiningArea(k,center_x,center_y)
 
-            if k * k + (k+1) * (k+1) <= m * temp:
-                ans = max(ans, temp)
+            for x in range(n):
+                for y in range(n):
+                    temp = 0
+                    for i in range(x-center_x, x-center_x+n):
+                        for j in range(y-center_y, y-center_y+n):
+                            if i<0 or i>n-1 or j<0 or j>n-1:
+                                continue
+                            
+                            temp += mining_area[i+center_x-x][j+center_y-y] * arr[i][j]
+
+                    if k * k + (k+1) * (k+1) <= m * temp:
+                        ans = max(ans, temp)
             
 print(ans)
+
+'''
+
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+
+'''
