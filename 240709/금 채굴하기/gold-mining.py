@@ -49,13 +49,6 @@ for k in range(n):
                     
                     temp += mining_area[i+center_x-x][j+center_y-y] * arr[i][j]
 
-            if temp == 34:
-                print('k:',k)
-                print('==== mining area ====')
-                for area in mining_area:
-                    print(area)
-
-                
             if k * k + (k+1) * (k+1) <= m * temp:
                 ans = max(ans, temp)
             
