@@ -18,7 +18,7 @@ def generateMiningArea(k):
     center_x = n // 2 
     center_y = n // 2
     
-    if k%2 != 0:
+    if n%2 == 0:
         center_x -= 1
         center_y -= 1
    
