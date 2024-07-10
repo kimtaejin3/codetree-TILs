@@ -34,6 +34,8 @@ for k in range(n):
     if n % 2 == 0:
         for center_x in range(n//2-2, n//2+2):
             for center_y in range(n//2-2, n//2+2):
+                if center_x < 0 or center_x > n-1 or center_y < 0 or center_y > n-1:
+                    continue
 
                 mining_area = generateMiningArea(k,center_x,center_y)
 
