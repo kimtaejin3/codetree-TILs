@@ -12,6 +12,7 @@
 # -> 그래서 center position을 완전탐색 했더니 시간초과가 났다.
 # -> 특정 4개로 center position candidate를 좁협더니 95% 에서 틀렸다
 # -> 그래서 candidate 범위를 딱 1을 늘렸더니 97%에서 틀렸다, 틀린것 보면 하나같이 1이 부족
+# -> 5로 늘리니까 시간초과,, 2로 가자
 
 n,m = map(int,input().split())
 
@@ -33,8 +34,8 @@ ans = 0
 
 for k in range(n):
     if n % 2 == 0:
-        for center_x in range(n//2-5, n//2+5):
-            for center_y in range(n//2-5, n//2+5):
+        for center_x in range(n//2-3, n//2+3):
+            for center_y in range(n//2-3, n//2+3):
                 if center_x < 0 or center_x > n-1 or center_y < 0 or center_y > n-1:
                     continue
 
