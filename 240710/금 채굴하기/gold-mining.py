@@ -10,6 +10,7 @@
 
 # 63%에서 틀림 -> mining area의 center position을 어떻게 잡아야 할지가 이슈
 # -> 그래서 center position을 완전탐색 했더니 시간초과가 났다.
+# -> 특정 4개로 center position candidate를 좁협더니 95% 에서 틀렸다 ㅠㅠㅠㅠ
 
 n,m = map(int,input().split())
 
@@ -31,8 +32,8 @@ ans = 0
 
 for k in range(n):
     if n % 2 == 0:
-        for center_x in range(n//2-1, n//2+1):
-            for center_y in range(n//2-1, n//2+1):
+        for center_x in range(n//2-2, n//2+2):
+            for center_y in range(n//2-2, n//2+2):
 
                 mining_area = generateMiningArea(k,center_x,center_y)
 
