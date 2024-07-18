@@ -14,47 +14,52 @@ for x in range(n):
                 flag = False
                 
                 # 여기에 for문 4개
-                for i in range(a+1):
+                for i in range(a):
                     temp += arr[cur_x][cur_y]
 
                     nx, ny = cur_x - 1, cur_y + 1
                     
                     if nx < 0 or ny > n-1:
                         flag = True
+
                         break
                     
                     cur_x, cur_y = nx, ny
 
-                if flag: 
-                    break
+                if flag:
+                    continue
 
-                for i in range(b+1):
+                for i in range(b):
                     temp += arr[cur_x][cur_y]
 
                     nx, ny = cur_x - 1, cur_y - 1
                     
                     if nx < 0 or ny < 0:
                         flag = True
+
                         break
                     
                     cur_x, cur_y = nx, ny
-                if flag: 
-                    break
-                for i in range(a+1):
+
+                if flag:
+                    continue
+
+                for i in range(a):
                     temp += arr[cur_x][cur_y]
 
                     nx, ny = cur_x + 1, cur_y - 1
                     
                     if nx > n-1 or ny < 0:
                         flag = True
+
                         break
                     
                     cur_x, cur_y = nx, ny
 
-                if flag: 
-                    break
+                if flag:
+                    continue
 
-                for i in range(b+1):
+                for i in range(b):
                     temp += arr[cur_x][cur_y]
 
                     nx, ny = cur_x + 1, cur_y + 1
@@ -64,7 +69,10 @@ for x in range(n):
                         break
                     
                     cur_x, cur_y = nx, ny
-               
+
+                if flag:
+                    continue
+
                 ans = max(ans, temp)
 
 print(ans)
