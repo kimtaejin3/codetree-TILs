@@ -3,7 +3,7 @@ n,m = map(int,input().split())
 arr = [list(map(int,input().split())) for _ in range(n)]
 
 def get_nums_of_gold(x,y,k):
-    return sum([arr[i][j] for i in range(n) for j in range(n) if abs(x-i) + abs(y-j) <= k])
+    return sum([arr[i][j] for i in range(n) for j in range(m) if abs(x-i) + abs(y-j) <= k])
 
 
 max_gold = 0
