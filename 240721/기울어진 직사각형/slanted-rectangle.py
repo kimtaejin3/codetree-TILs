@@ -8,16 +8,19 @@ ds = [(-1,1),(-1,-1),(1,-1),(1,1)]
 
 for x in range(n):
     for y in range(n):
-        cur_x, cur_y = x, y
 
         for a in range(1,n+1):
             for b in range(1,n+1):
                 temp = 0
                 flag = False
+                cur_x, cur_y = x, y
+
 
                 for d in range(len(ds)):
                     if d%2 == 0:
                         for i in range(a):
+                            # if x == 3 and y == 1:
+                            #     print('check0:',cur_x,cur_y,a,b)
                             temp += arr[cur_x][cur_y]
                             nx, ny = cur_x + ds[d][0], cur_y + ds[d][1]
 
@@ -28,6 +31,8 @@ for x in range(n):
                             cur_x, cur_y = nx, ny
                     else:
                         for i in range(b):
+                            # if x == 3 and y == 1:
+                            #     print('check1:',cur_x,cur_y,a,b)
                             temp += arr[cur_x][cur_y]
                             nx, ny = cur_x + ds[d][0], cur_y + ds[d][1]
 
@@ -39,13 +44,9 @@ for x in range(n):
                     if flag:
                         break
                         
-                        
                 if flag:
                     continue        
                 
-                if temp == 26:
-                    print(x, y)
-
                 ans = max(ans, temp)
 
 print(ans)
