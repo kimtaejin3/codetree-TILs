@@ -11,9 +11,12 @@ def checkIsAllPositiveNumbers(x,y,w,h):
 
     for i in range(x, x+h):
         for j in range(y, y+w):
-            if i > n-1 or j > m-1:continue
+            if i > n-1 or j > m-1:
+                isAllPositiveNumbers = False
+                break
             if grid[i][j] < 0:
                 isAllPositiveNumbers = False
+                break
     
     return isAllPositiveNumbers
 
