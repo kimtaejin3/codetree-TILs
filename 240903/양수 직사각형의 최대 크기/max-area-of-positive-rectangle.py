@@ -24,6 +24,6 @@ for x in range(n):
         for w in range(1,m+1):
             for h in range(1,n+1):
                 if checkIsAllPositiveNumbers(x,y,w,h):
-                    ans = max(ans, n*m)
+                    ans = max(ans, w*h)
 
 print(ans)
