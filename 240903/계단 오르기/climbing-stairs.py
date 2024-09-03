@@ -5,7 +5,7 @@ arr = [0] * (n+2)
 arr[2] = 1
 arr[3] = 1
 
-for i in range(4, n):
+for i in range(4, n+1):
     arr[i] = arr[i - 2] + arr[i - 3]
 
 
