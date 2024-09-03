@@ -5,7 +5,7 @@ grid = [
     for _ in range(n)
 ]
 
-def checkIsAllPositiveNumbers(x,y,w,h):
+def isAllPositiveNumbers(x,y,w,h):
     
     isAllPositiveNumbers = True
 
@@ -14,7 +14,7 @@ def checkIsAllPositiveNumbers(x,y,w,h):
             if i > n-1 or j > m-1:
                 isAllPositiveNumbers = False
                 break
-            if grid[i][j] < 0:
+            if grid[i][j] <= 0:
                 isAllPositiveNumbers = False
                 break
     
@@ -26,7 +26,7 @@ for x in range(n):
     for y in range(m):
         for w in range(1,m+1):
             for h in range(1,n+1):
-                if checkIsAllPositiveNumbers(x,y,w,h):
+                if isAllPositiveNumbers(x,y,w,h):
                     ans = max(ans, w*h)
 
 print(ans)
