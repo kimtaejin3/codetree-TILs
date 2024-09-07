@@ -67,7 +67,7 @@ def down(y, x, d, id):
         down(y + 1, x + 1, (d + 1) % 4, id)
     else:
         # 1, 2, 3의 움직임을 모두 취할 수 없을떄 입니다.
-        if not inRange(y-1, x-1) or not inRange(y+1, x+1):
+        if not inRange(y-1, x-1):
             # 숲을 벗어나는 경우 모든 골렘이 숲을 빠져나갑니다
             resetMap()
         else:
