@@ -33,7 +33,7 @@ def checkDown(r):
     return False
 
 def operate(r,d,flag):
-    if flag == 1 and visited[r]:
+    if visited[r]:
         return
 
     shift(r,d)
@@ -54,6 +54,7 @@ def operate(r,d,flag):
 for _ in range(Q):
     r,d = input().split()
     r = int(r) - 1
+    visited = [False] * N
     operate(r,d,0)
 
 for g in grid:
