@@ -32,8 +32,8 @@ def checkDown(r):
             return True
     return False
 
-def operate(r,d):
-    if visited[r]:
+def operate(r,d,flag):
+    if flag == 1 and visited[r]:
         return
 
     shift(r,d)
@@ -41,20 +41,20 @@ def operate(r,d):
 
     if checkUp(r):
         if d == "L":
-            operate(r-1,"R")
+            operate(r-1,"R",1)
         elif d == "R":
-            operate(r-1,"L")
+            operate(r-1,"L",1)
 
     if checkDown(r):
         if d == "L":
-            operate(r+1,"R")
+            operate(r+1,"R",1)
         elif d == "R":
-            operate(r+1,"L")
+            operate(r+1,"L",1)
 
 for _ in range(Q):
     r,d = input().split()
     r = int(r) - 1
-    operate(r,d)
+    operate(r,d,0)
 
 for g in grid:
     for elem in g:
