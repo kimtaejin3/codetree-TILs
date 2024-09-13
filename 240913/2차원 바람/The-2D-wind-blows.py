@@ -2,6 +2,12 @@ N, M, Q = map(int,input().split())
 
 grid = [list(map(int,input().split())) for _ in range(N)]
 
+if Q == 0:
+    for g in grid:
+        for elem in g:
+            print(elem, end=' ')
+        print()
+
 for i in range(Q):
     r1,c1,r2,c2 = map(int,input().split())
     r1,c1,r2,c2 = r1-1,c1-1,r2-1,c2-1
