@@ -13,7 +13,7 @@ tr,tc = r-1, c-1
 rectangle.append(grid[tr][tc])
 
 def inRange(r,c):
-    return 0 <= r < n - 1 and 0 <= c < n - 1
+    return 0 <= r < n and 0 <= c < n 
 
 for i in range(len(tries_count)):
     count = tries_count[i]
