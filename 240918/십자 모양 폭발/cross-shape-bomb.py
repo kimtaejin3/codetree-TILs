@@ -27,10 +27,7 @@ for i in range(n):
         if grid[j][i] == 0:
             k = j - 1
 
-            if k < 0:
-                continue
-
-            while grid[k][i] == 0:
+            while k >= 0 and grid[k][i] == 0:
                 k = k - 1
             
             if k >= 0:
