@@ -25,8 +25,13 @@ for _ in range(val - 1):
 for i in range(n):
     for j in range(n-1, 0, -1):
         if grid[j][i] == 0:
-            grid[j][i] = grid[j-1][i]
-            grid[j-1][i] = 0
+            k = j - 1
+            while grid[k][i] == 0:
+                k = k - 1
+            
+            if k >= 0:
+                grid[j][i] = grid[k][i]
+                grid[k][i] = 0
 
 for i in range(n):
     for j in range(n):
