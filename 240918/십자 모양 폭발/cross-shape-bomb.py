@@ -13,7 +13,7 @@ grid[r-1][c-1] = 0
 steps = [(-1,0),(1,0),(0,-1),(0,1)]
 positions = [[r-1,c-1] for _ in range(4)]
 
-for _ in range(1):
+for _ in range(val - 1):
     for i in range(4):
         positions[i][0] += steps[i][0]
         positions[i][1] += steps[i][1]
@@ -23,7 +23,7 @@ for _ in range(1):
             grid[position[0]][position[1]] = 0
 
 for i in range(n):
-    for j in range(1,n):
+    for j in range(n-1, 0, -1):
         if grid[j][i] == 0:
             grid[j][i] = grid[j-1][i]
             grid[j-1][i] = 0
