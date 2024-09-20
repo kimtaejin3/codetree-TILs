@@ -17,12 +17,14 @@ def find():
         else:
             if end - start >= m:
                 for i in range(start, end):
-                    arr[i] = -1
+                    if i < n:
+                        arr[i] = -1
             start = end
     
     if end - start >= m:
         for i in range(start, end):
-            arr[i] = -1
+            if i < n:
+                arr[i] = -1
 
     while arr.count(-1) > 0:
         arr.remove(-1)
