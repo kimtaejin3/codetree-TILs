@@ -19,6 +19,7 @@ def find():
                 for i in range(start, end):
                     arr[i] = -1
             start = end
+    
     if end - start >= m:
         for i in range(start, end):
             arr[i] = -1
@@ -28,17 +29,17 @@ def find():
 
 def isExist():
     global arr
+    cnt = 0
     for i in range(len(arr)-1):
         if arr[i] == arr[i+1]:
-            return True
+            cnt += 1
     
-    return False
+    return cnt
 
-# while isExist():
-#     find()
 
-while isExist():
+while isExist() + 1 >= m:
     find()
+
 
 print(len(arr))
 for elem in arr:
