@@ -16,9 +16,6 @@ while True:
 
     for curr_idx, number in enumerate(numbers):
 
-        if number == 0:
-            continue
-        
         end_idx = get_end_idx_of_explosion(curr_idx, number)
 
         if end_idx - curr_idx + 1 >= m:
