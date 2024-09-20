@@ -1,48 +1,35 @@
-n, m = map(int, input().split())
+n, m = tuple(map(int,input().split()))
+numbers = [
+    int(input())
+    for _ in range(n)
+]
 
-arr = []
-for _ in range(n):
-    val = int(input())
-    arr.append(val)
-
-# 포인터 2개쓰기
-
-def find():
-    global arr
-    start, end = 0, 1
+def get_end_idx_of_explosion(start_idx, curr_num):
+    for end_idx in range(start_idx + 1, len(numbers)):
+        if numbers[end_idx] != curr_num:
+            return end_idx - 1
     
-    while end < len(arr):
-        if arr[start] == arr[end]:
-            end += 1
-        else:
-            if end - start >= m:
-                for i in range(start, end):
-                    if i < len(arr):
-                        arr[i] = -1
-            start = end
+    return len(numbers) - 1
+
+while True:
+    did_explode = False
+
+    for curr_idx, number in enumerate(numbers):
+
+        if number == 0:
+            continue
+        
+        end_idx = get_end_idx_of_explosion(curr_idx, number)
+
+        if end_idx - curr_idx + 1 >= m:
+            numbers[curr_idx:end_idx+1] = [0] * (end_idx - curr_idx + 1)
+            did_explode = True
     
-    if end - start >= m:
-        for i in range(start, end):
-            if i < len(arr):
-                arr[i] = -1
+    numbers = list(filter(lambda x: x>0, numbers))
 
-    while arr.count(-1) > 0:
-        arr.remove(-1)
+    if not did_explode:
+        break
 
-def isExist():
-    global arr
-    cnt = 0
-    for i in range(len(arr)-1):
-        if arr[i] == arr[i+1]:
-            cnt += 1
-    
-    return cnt
-
-
-while isExist() + 1 >= m:
-    find()
-
-
-print(len(arr))
-for elem in arr:
-    print(elem)
+print(len(numbers))
+for number in numbers:
+    print(number)
