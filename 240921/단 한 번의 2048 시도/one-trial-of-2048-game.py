@@ -8,19 +8,30 @@ if dir == "R" or dir == "L":
     for i in range(4):
         row = grid[i].copy()
 
-        for j in range(3,0,-1):
-            if row[j] == row[j-1] and row[j] != 0:
-                row[j] += row[j-1]
-                row[j-1] = 0
-
-        if row.count(0) > 0:
+        while row.count(0) > 0:
             row.remove(0)
             
             if dir == "R":
-                row.insert(0, 0)
+                row.insert(0, -1)
             else:
-                row.append(0)
+                row.append(-1)
 
+        for j in range(4):
+            if row[j] == -1:
+                row[j] = 0
+
+        for j in range(len(row)-1, 0, -1):
+            if row[j] == row[j-1]:
+                row[j] += row[j-1]
+                row[j-1] = -1
+
+        while row.count(-1) > 0:
+            row.remove(-1)
+
+            if dir == "L":
+                row.append(0)
+            else:
+                row.insert(0,0)
         grid[i] = row
 
 elif dir == "U" or dir == "D":
@@ -28,11 +39,6 @@ elif dir == "U" or dir == "D":
         col = []
         for j in range(4):
             col.append(grid[j][i])
-
-        for j in range(3,0,-1):
-            if col[j] == col[j-1] and col[j] != 0:
-                col[j] += col[j-1]
-                col[j-1] = 0
 
         while col.count(0) > 0:
             col.remove(0)
@@ -46,6 +52,19 @@ elif dir == "U" or dir == "D":
             if col[j] == -1:
                 col[j] = 0
 
+        for j in range(len(col)-1, 0, -1):
+            if col[j] == col[j-1]:
+                col[j] += col[j-1]
+                col[j-1] = -1
+
+        while col.count(-1) > 0:
+            col.remove(-1)
+
+            if dir == "U":
+                col.append(0)
+            else:
+                col.insert(0,0)
+                
         for j in range(4):
             grid[j][i] = col[j] 
 
