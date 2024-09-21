@@ -24,6 +24,17 @@ if dir == "R" or dir == "L":
             if row[j] == row[j-1]:
                 row[j] += row[j-1]
                 row[j-1] = -1
+        
+        if dir == "L":
+            for j in range(0, len(row)-1):
+                if row[j] == row[j+1]:
+                    row[j] += row[j+1]
+                    row[j+1] = -1
+        elif dir == "R":
+            for j in range(len(row)-1, 0, -1):
+                if row[j] == row[j-1]:
+                    row[j] += row[j-1]
+                    row[j-1] = -1
 
         while row.count(-1) > 0:
             row.remove(-1)
