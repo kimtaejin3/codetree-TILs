@@ -55,7 +55,7 @@ elif dir == "U" or dir == "D":
         if dir == "U":
             for j in range(0, len(col)-1):
                 if col[j] == col[j+1]:
-                    col[j] += col[j-1]
+                    col[j] += col[j+1]
                     col[j+1] = -1
         elif dir == "D":
             for j in range(len(col)-1, 0, -1):
