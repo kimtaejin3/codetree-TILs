@@ -10,7 +10,7 @@ next_grid = [
     for _ in range(n)
 ]
 
-
+ 
 def in_bomb_range(x, y, center_x, center_y, bomb_range):
     return (x == center_x or y == center_y) and \
            abs(x - center_x) + abs(y - center_y) < bomb_range
@@ -35,23 +35,24 @@ def bomb(center_x, center_y):
         for j in range(n):
             grid[i][j] = next_grid[i][j]
 
+    for i in range(n):
+        for j in range(n):
+            next_grid[i][j] = 0
+
             
-# for i in range(m):
-#     c = int(input())
+for i in range(m):
+    c = int(input())
 
-#     r = -1
+    r = -1
     
-#     for j in range(n):
-#         if grid[j][c-1] != 0:
-#             r = j + 1
-#             break
+    for j in range(n):
+        if grid[j][c-1] != 0:
+            r = j + 1
+            break
 
-#     # print(r,c)
-#     if r > 0:
-#         bomb(r - 1, c - 1)
+    if r > 0:
+        bomb(r - 1, c - 1)
 
-# bomb(0,1)
-bomb(1,1)
 
 for i in range(n):
     for j in range(n):
