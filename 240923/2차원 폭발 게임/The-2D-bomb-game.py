@@ -40,11 +40,7 @@ def get_end_idx(start_idx, num):
 def is_consecutive_exist():
     for col in range(N):
         for start_idx in range(N):
-
             end_idx = get_end_idx(start_idx,col)
-
-            if grid[start_idx][col] == 0:
-                return False
 
             if end_idx - start_idx + 1 >= M:
                 return True
@@ -97,4 +93,5 @@ for row in grid:
     for elem in row: 
         if elem > 0:
             ans += 1
+            
 print(ans)
