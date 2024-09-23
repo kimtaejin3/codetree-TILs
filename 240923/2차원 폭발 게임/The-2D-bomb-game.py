@@ -43,7 +43,10 @@ def is_consecutive_exist():
 
             end_idx = get_end_idx(start_idx,col)
 
-            if end_idx - start_idx + 1 >= M and grid[start_idx][col] != 0:
+            if start_idx == end_idx and grid[start_idx][col] == 0:
+                return False
+
+            if end_idx - start_idx + 1 >= M:
                 return True
     
     return False
