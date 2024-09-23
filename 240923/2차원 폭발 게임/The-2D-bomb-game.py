@@ -37,6 +37,15 @@ def get_end_idx(start_idx, num):
 
     return N-1
 
+def is_consecutive_exist():
+    for col in range(N):
+        for start_idx in range(N):
+            end_idx = get_end_idx(start_idx,col)
+
+            if end_idx - start_idx + 1 >= M:
+                return True
+    
+    return False
 
 def bomb(num):
     for start_idx in range(N):
@@ -70,10 +79,18 @@ def bomb_all():
 for _ in range(K):
     bomb_all()
     down()
+    if is_consecutive_exist():
+        bomb_all()
+        down()
     rotate()
     down()
 
+if is_consecutive_exist():
+    bomb_all()
+    down()
+
 ans = 0
+
 for row in grid:
     for elem in row: 
         if elem != 0:
