@@ -93,7 +93,7 @@ ans = 0
 
 for row in grid:
     for elem in row: 
-        if elem != 0:
+        if elem > 0:
             ans += 1
             
 print(ans)
