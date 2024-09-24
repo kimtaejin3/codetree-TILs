@@ -30,8 +30,6 @@ def get_end_idx(start_idx, num):
     end_idx = start_idx
     
     for i in range(start_idx, N-1):
-        if grid[i][num] == 0:
-            return -1
         if grid[i][num] == grid[i+1][num] and grid[i][num] != 0:
             end_idx += 1
         else:
