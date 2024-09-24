@@ -35,7 +35,7 @@ def get_end_idx(start_idx, num):
         else:
             return end_idx
 
-    if N == 1:
+    if N == 1 and grid[0][num] == 0:
         return -1
 
     return N-1
