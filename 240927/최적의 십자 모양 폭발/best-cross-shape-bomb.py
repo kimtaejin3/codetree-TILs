@@ -13,7 +13,8 @@ temp_grid = grid.copy()
 
 dxs, dys = [-1,1,0,0],[0,0,-1,1]
 
-def explode(x,y,scale):
+def explode(x,y):
+    scale = temp_grid[x][y] - 1
     temp_grid[x][y] = 0
     nx,ny = x,y
     for dx,dy in zip(dxs,dys):
@@ -56,17 +57,16 @@ def countAdjacency():
     return cnt
 
 ans = 0
+
 for i in range(n):
     for j in range(n):
-        for k in range(n):
-            temp_grid = [[0 for _ in range(n)] for _ in range(n)]
-            for x in range(n):
-                for y in range(n):
-                    temp_grid[x][y] = grid[x][y]
-            
-            explode(i,j,k)
-            down()
-
-            ans = max(ans, countAdjacency())
+        temp_grid = [[0 for _ in range(n)] for _ in range(n)]
+        for x in range(n):
+            for y in range(n):
+                temp_grid[x][y] = grid[x][y]
+        
+        explode(i,j)
+        down()
+        ans = max(ans, countAdjacency())
 
 print(ans)
