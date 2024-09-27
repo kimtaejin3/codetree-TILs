@@ -9,8 +9,6 @@ next_grid = [
     for _ in range(n)
 ]
 
-temp_grid = grid.copy()
-
 dxs, dys = [-1,1,0,0],[0,0,-1,1]
 
 def explode(x,y):
