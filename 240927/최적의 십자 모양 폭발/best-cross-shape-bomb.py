@@ -20,8 +20,6 @@ def explode(x,y):
             nx,ny = nx + dx, ny + dy
             if nx < 0 or nx > n - 1 or ny < 0 or ny > n - 1:
                 continue
-            if x == 0 and y == 3:
-                print(nx,ny)
             temp_grid[nx][ny] = 0
         
         nx,ny = x,y
