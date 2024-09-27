@@ -20,7 +20,8 @@ def explode(x,y):
             nx,ny = nx + dx, ny + dy
             if nx < 0 or nx > n - 1 or ny < 0 or ny > n - 1:
                 continue
-
+            if x == 0 and y == 3:
+                print(nx,ny)
             temp_grid[nx][ny] = 0
         
         nx,ny = x,y
@@ -29,7 +30,7 @@ def down():
     for i in range(n):
         index = n - 1
         for j in range(n-1, -1, -1):
-            if temp_grid[i][j]:
+            if temp_grid[j][i]:
                 next_grid[index][i] = temp_grid[j][i]
                 index -= 1
         
@@ -65,6 +66,7 @@ for i in range(n):
         
         explode(i,j)
         down()
+
         ans = max(ans, countAdjacency())
 
 print(ans)
