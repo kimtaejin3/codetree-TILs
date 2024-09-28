@@ -1,3 +1,4 @@
+# visited를 쓸 필요가 없음... 작은 -> 큰 으로 이동했는데 큰 -> 작은으로 절대 이동안하기 때문
 n, curr_x, curr_y = tuple(map(int,input().split()))
 a = [[0] * (n+1)]
 for _ in range(n):
