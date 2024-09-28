@@ -13,7 +13,7 @@ visited = [
 def inRange(x,y):
     return 0 <= x <= n-1 and 0 <= y <= n-1
 
-dxs = [-1,1,0,1]
+dxs = [-1,1,0,0]
 dys = [0,0,-1,1]
 
 ans = []
@@ -22,6 +22,8 @@ def simulate(x,y):
     global ans
 
     cur_x, cur_y = x, y
+    visited[x][y] = True
+    ans.append(grid[x][y])
 
     while True:
         max_pos = (0,0)
@@ -34,6 +36,7 @@ def simulate(x,y):
                 max_val = grid[next_x][next_y]
                 visited[next_x][next_y] = True
                 max_pos = next_x,next_y
+                break
         
         if max_val == grid[cur_x][cur_y]:
             break
@@ -41,5 +44,5 @@ def simulate(x,y):
         cur_x, cur_y = max_pos
 
 
-simulate(r,c)
-print(ans)
+simulate(r-1,c-1)
+print(' '.join(map(str, ans)))
