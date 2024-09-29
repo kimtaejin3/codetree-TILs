@@ -12,13 +12,17 @@ block = [
 if n == 1:
     print(1)
     exit(0)
-
+t = False
 for row in range(n-1):
     flag = False
     for i in range(k-1, m+k-1):
         if grid[row+1][i] == 1:
             flag = True
     
+    if row == n-2:
+        for i in range(k-1, m+k-1):
+            grid[n-1][i] = 1
+
     if flag:
         for i in range(k-1, m+k-1):
             grid[row][i] = 1
