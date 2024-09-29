@@ -1,34 +1,31 @@
-n, m, k = map(int, input().split())
+n,m,k = tuple(map(int,input().split()))
 
 grid = [
     list(map(int,input().split()))
     for _ in range(n)
 ]
 
-block = [
-    1 for _ in range(m)
-]
+def all_blank(row, col_s, col_e):
+    return all([
+        not grid[row][col]
+        for col in range(col_s, col_e+1)
+    ])
 
-if n == 1:
-    print(1)
-    exit(0)
-t = False
-for row in range(n-1):
-    flag = False
-    for i in range(k-1, m+k-1):
-        if grid[row+1][i] == 1:
-            flag = True
+def get_target_row():
+    for row in range(n-1):
+        if not all_blank(row + 1, k, k+m-1):
+            return row
     
-    if row == n-2:
-        for i in range(k-1, m+k-1):
-            grid[n-1][i] = 1
+    return n-1
 
-    if flag:
-        for i in range(k-1, m+k-1):
-            grid[row][i] = 1
-        break
-    
-for row in grid:
-    for elem in row:
-        print(elem, end=' ')
+k -= 1
+
+target_row = get_target_row()
+
+for col in range(k, k+m):
+    grid[target_row][col] = 1
+
+for i in range(n):
+    for j in range(n):
+        print(grid[i][j], end=' ')
     print()
