@@ -9,6 +9,10 @@ block = [
     1 for _ in range(m)
 ]
 
+if n == 1:
+    print(1)
+    exit(0)
+
 for row in range(n-1):
     flag = False
     for i in range(k-1, m+k-1):
