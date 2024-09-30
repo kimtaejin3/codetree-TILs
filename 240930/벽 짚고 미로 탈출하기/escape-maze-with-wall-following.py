@@ -74,7 +74,7 @@ while True:
 
     if can_go(d):
 
-        if is_collision(d):
+        while is_collision(d):
             d = (d+1)%4
 
         x = x + dxs[d]
