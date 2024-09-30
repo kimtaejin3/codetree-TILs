@@ -81,7 +81,7 @@ while True:
         
         if x < 0 or x > n - 1 or y < 0 or y > n - 1:
             break
-        if visited[x][y]:
+        if visited[x][y] or grid[x][y] == "#":
             print(-1)
             exit(0)
         visited[x][y] = True
@@ -94,7 +94,7 @@ while True:
         x = x + dxs[d]
         y = y + dys[d]
 
-        if visited[x][y]:
+        if visited[x][y] or grid[x][y] == "#":
             print(-1)
             exit(0)
 
