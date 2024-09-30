@@ -14,6 +14,11 @@ d = 0
 # while True? => 무한루프 
 # 무한루프인데 -1을 판단하는 기준? 가본 곳에 도착했으면 -1 출력 후, break!!
 
+visited = [
+    [False for _ in range(n)]
+    for _ in range(n)
+]
+
 def can_go(d):
     ans = False
     if d == 0:
@@ -61,7 +66,9 @@ t = 0
 x -= 1
 y -= 1
 
-while t < 100:
+visited[x][y] = True
+
+while True:
     t += 1
 
     if can_go(d):
@@ -71,9 +78,13 @@ while t < 100:
 
         x = x + dxs[d]
         y = y + dys[d]
-
+        
         if x < 0 or x > n - 1 or y < 0 or y > n - 1:
             break
+        if visited[x][y]:
+            print(-1)
+            exit(0)
+        visited[x][y] = True
 
     else:
         d -= 1
@@ -82,9 +93,11 @@ while t < 100:
         
         x = x + dxs[d]
         y = y + dys[d]
-    
-    # print((x,y), can_go(d))
-print(t)
-   
 
-# print(grid)
+        if visited[x][y]:
+            print(-1)
+            exit(0)
+
+        visited[x][y] = True
+
+print(t)
