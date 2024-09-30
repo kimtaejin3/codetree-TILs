@@ -14,6 +14,7 @@ d = 0
 # while True? => 무한루프 
 # 무한루프인데 -1을 판단하는 기준? 가본 곳에 도착했으면 -1 출력 후, break!!
 # 종료조건을 모르겠음. visited 방식도 특정 케이스를 커버하지는 못함
+# 딱 아래의 케이스 : if visited[][] 부분을 어떻게 핸들할지 모르겠음
 
 visited = [
     [False for _ in range(n)]
@@ -82,7 +83,8 @@ while True:
         
         if x < 0 or x > n - 1 or y < 0 or y > n - 1:
             break
-        if visited[x][y] or grid[x][y] == "#":
+        if visited[x][y]:
+            print('ㅋㅋ:',(x,y))
             print(-1)
             exit(0)
         visited[x][y] = True
@@ -96,11 +98,12 @@ while True:
         x = x + dxs[d]
         y = y + dys[d]
 
-        if visited[x][y] or grid[x][y] == "#":
+        if visited[x][y]:
             print(-1)
             exit(0)
 
         visited[x][y] = True
     
+    print((x,y))
 
 print(t)
