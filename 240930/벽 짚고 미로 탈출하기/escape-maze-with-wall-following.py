@@ -102,6 +102,5 @@ while True:
 
         visited[x][y] = True
     
-    print((x,y))
 
 print(t)
