@@ -61,7 +61,7 @@ t = 0
 x -= 1
 y -= 1
 
-while True:
+while t < 100:
     t += 1
 
     if can_go(d):
@@ -79,8 +79,12 @@ while True:
         d -= 1
         if d < 0:
             d = 3
+        
+        x = x + dxs[d]
+        y = y + dys[d]
     
+    # print((x,y), can_go(d))
 print(t)
    
 
-print(grid)
+# print(grid)
