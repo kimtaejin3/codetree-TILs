@@ -70,8 +70,12 @@ while True:
     t += 1
 
     if can_go(d):
-
+        check = 0
         while is_collision(d):
+            check += 1
+            if check > 4:
+                print(-1)
+                exit(0)
             d = (d+1)%4
 
         x = x + dxs[d]
