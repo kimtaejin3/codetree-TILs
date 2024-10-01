@@ -40,7 +40,7 @@ def simulate():
 
     dxs, dys = [0, 1, 0, -1], [1, 0, -1, 0]
 
-    next_x, next_y = curr_dir + dxs[curr_dir], curr_y + dys[curr_dir]
+    next_x, next_y = curr_x + dxs[curr_dir], curr_y + dys[curr_dir]
 
     if wall_exist(next_x, next_y):
         curr_dir = (curr_dir - 1 + 4) % 4
