@@ -1,112 +1,73 @@
+import sys
+
+DIR_NUM = 4
+
 n = int(input())
-x, y = map(int, input().split())
 
-grid = [
-    list(input())
-    for _ in range(n)
+curr_x, curr_y = tuple(map(int,input().split()))
+
+a = [
+    [0 for _ in range(n+1)]
+    for _ in range(n+1)
 ]
-
-dxs = [0,-1,0,1]
-dys = [1,0,-1,0]
-
-d = 0
 
 visited = [
-    [[False,0] for _ in range(n)]
-    for _ in range(n)
+    [
+        [False for _ in range(DIR_NUM)]
+        for _ in range(n + 1)
+    ]
+    for _ in range(n+1)
 ]
 
-def can_go(d):
-    ans = False
-    if d == 0:
-        if x+1>n-1:
-            return False
-        return grid[x+1][y] == "#"
-    elif d == 1:
-        if y+1 > n-1:
-            return False
-        return grid[x][y+1] == "#"
-    elif d == 2:
-        if x-1 < 0:
-            return False
-        return grid[x-1][y] == "#"
-    elif d == 3:
-        if y-1<0:
-            return False
-        return grid[x][y-1] == "#"
+elapsed_time = 0
+curr_dir = 0
 
-    return ans
+def in_range(x,y):
+    return 1 <= x and x <= n and 1 <= y and y <= n
 
-def is_collision(d):
-    ans = False
-    if d == 0:
-        if y + 1 > n-1:
-            return False
-        return grid[x][y+1] == "#"
-    elif d == 1:
-        if x -1 < 0:
-            return False
-        return grid[x-1][y] == "#"
-    elif d == 2:
-        if y-1 < 0:
-            return False
-        return grid[x][y-1] == "#"
-    elif d == 3:
-        if x+1 > n-1:
-            return False
-        return grid[x+1][y] == "#"
+def wall_exist(x,y):
+    return in_range(x,y) and a[x][y] == '#'
 
-    return ans
 
-t = 0
+def simulate():
+    global curr_x, curr_y, curr_dir, elapsed_time
 
-x -= 1
-y -= 1
-
-visited[x][y][0] = True
-visited[x][y][1] = 0
-
-while True:
-    t += 1
-
-    if can_go(d):
-        check = 0
-        while is_collision(d):
-            check += 1
-            if check > 4:
-                print(-1)
-                exit(0)
-            d = (d+1)%4
-
-        x = x + dxs[d]
-        y = y + dys[d]
-        
-        if x < 0 or x > n - 1 or y < 0 or y > n - 1:
-            break
-
-        if visited[x][y][0] and visited[x][y][1] == d:
-            print(-1)
-            exit(0)
-        
-
-        visited[x][y][0] = True
-        visited[x][y][1] = d
-
-    else:
-        
-        d -= 1
-        if d < 0:
-            d = 3
-        
-        x = x + dxs[d]
-        y = y + dys[d]
-
-        if visited[x][y][0] and visited[x][y][1] == d:
-            print(-1)
-            exit(0)
-
-        visited[x][y][0] = True
-        visited[x][y][1] = d
+    if visited[curr_x][curr_y][curr_dir]:
+        print(-1)
+        sys.exit(0)
     
+    visited[curr_x][curr_y][curr_dir] = True
 
-print(t)
+    dxs, dys = [0, 1, 0, -1], [1, 0, -1, 0]
+
+    next_x, next_y = curr_dir + dxs[curr_dir], curr_y + dys[curr_dir]
+
+    if wall_exist(next_x, next_y):
+        curr_dir = (curr_dir - 1 + 4) % 4
+    
+    elif not in_range(next_x, next_y):
+        curr_x, curr_y = next_x, next_y
+        elapsed_time += 1
+    
+    else:
+        rx = next_x + dxs[(curr_dir + 1) % 4]
+        ry = next_y + dys[(curr_dir + 1) % 4]
+
+        if wall_exist(rx, ry):
+            curr_x, curr_y = next_x, next_y
+            elapsed_time += 1
+        
+        else:
+            curr_x, curr_y = rx, ry
+            curr_dir = (curr_dir + 1) % 4
+            elapsed_time += 2
+
+for i in range(1, n+1):
+    given_row = input()
+    for j, elem in enumerate(given_row, start = 1):
+        a[i][j] = elem
+
+while in_range(curr_x, curr_y):
+    simulate()
+
+print(elapsed_time)
