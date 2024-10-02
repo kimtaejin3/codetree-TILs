@@ -19,9 +19,8 @@ a[r][c] = opposite_num(dice[0])
 
 for i in range(m):
     order = orders[i]
-    up = dice[0]
-    front = dice[1]
-    right = dice[2]
+    pre_up, pre_front, pre_right = dice[0],dice[1],dice[2]
+    up, front, right = dice[0], dice[1], dice[2]
 
     nr, nc = r, c
 
@@ -46,6 +45,9 @@ for i in range(m):
         nc += 1
     
     if nr < 0 or nr > n - 1 or nc < 0 or nc > n - 1:
+        dice[0] = pre_up
+        dice[1] = pre_front
+        dice[2] = pre_right
         continue
     
     
