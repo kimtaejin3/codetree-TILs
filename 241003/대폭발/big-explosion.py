@@ -1,52 +1,51 @@
-n, m, r, c = map(int,input().split())
-
-a = [
+n, m, r, c = tuple(map(int,input().split()))
+grid = [
     [0 for _ in range(n)]
     for _ in range(n)
 ]
 
-r -= 1
-c -= 1
+next_grid = [
+    [0 for _ in range(n)]
+    for _ in range(n)
+]
 
-a[r][c] = 1
+def in_range(x, y):
+    return 0 <= x and x < n and 0 <= y and y < n
 
-dxs, dys = [-1,1,0,0],[0,0,-1,1]
+def expand(x, y, dist):
+    dxs, dys = [-1, 1, 0, 0], [0, 0, -1, 1]
+    for dx, dy in zip(dxs, dys):
+        nx, ny = x + dx * dist, y + dy * dist
+        if in_range(nx, ny):
+            next_grid[nx][ny] = 1
 
-judge = [1]
-
-for t in range(1,m+1):
+def simulate(dist):
     for i in range(n):
         for j in range(n):
-            if a[i][j] in judge:
-                top = (i + dxs[0] * pow(2,t-1), j + dys[0] * pow(2,t-1))
-                bottom = (i + dxs[1] * pow(2,t-1), j + dys[1] * pow(2,t-1))
-                left = (i + dxs[2] * pow(2,t-1), j + dys[2] * pow(2,t-1))
-                right = (i + dxs[3] * pow(2,t-1), j + dys[3] * pow(2,t-1))
-
-                if top[0] >= 0 and a[top[0]][top[1]] not in judge:
-                    a[top[0]][top[1]] = t + 1
-                
-                if bottom[0] < n and a[bottom[0]][bottom[1]] not in judge:
-                    a[bottom[0]][bottom[1]] = t + 1
-                
-                if left[1] >= 0 and a[left[0]][left[1]] not in judge:
-                    a[left[0]][left[1]] =  t + 1
-                
-                if right[1] < n and a[right[0]][right[1]] not in judge:
-                    a[right[0]][right[1]] =  t + 1
+            next_grid[i][j] = 0
     
-    judge.append(t + 1)
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j]:
+                expand(i, j, dist)
+    
+    for i in range(n):
+        for j in range(n):
+            if next_grid[i][j]:
+                grid[i][j] = 1
 
-ans = 0
+grid[r-1][c-1] = 1
 
-# for row in a:
-    # for elem in row:
-        # print(elem, end=' ')
-    # print()
+dist = 1
 
-for row in a:
-    for elem in row:
-        if elem > 0:
-            ans += 1
+for _ in range(m):
+    simulate(dist)
+    dist *= 2
+
+ans = sum([
+    grid[i][j]
+    for i in range(n)
+    for j in range(n)
+])
 
 print(ans)
