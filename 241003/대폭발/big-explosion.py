@@ -18,10 +18,10 @@ for t in range(1,m+1):
     for i in range(n):
         for j in range(n):
             if a[i][j] in judge:
-                top = (i + dxs[0] * t, j + dys[0] * t)
-                bottom = (i + dxs[1] * t, j + dys[1] * t)
-                left = (i + dxs[2] * t, j + dys[2] * t)
-                right = (i + dxs[3] * t, j + dys[3] * t)
+                top = (i + dxs[0] * pow(2,t-1), j + dys[0] * pow(2,t-1))
+                bottom = (i + dxs[1] * pow(2,t-1), j + dys[1] * pow(2,t-1))
+                left = (i + dxs[2] * pow(2,t-1), j + dys[2] * pow(2,t-1))
+                right = (i + dxs[3] * pow(2,t-1), j + dys[3] * pow(2,t-1))
 
                 if top[0] >= 0 and a[top[0]][top[1]] not in judge:
                     a[top[0]][top[1]] = t + 1
@@ -38,6 +38,11 @@ for t in range(1,m+1):
     judge.append(t + 1)
 
 ans = 0
+
+# for row in a:
+    # for elem in row:
+        # print(elem, end=' ')
+    # print()
 
 for row in a:
     for elem in row:
