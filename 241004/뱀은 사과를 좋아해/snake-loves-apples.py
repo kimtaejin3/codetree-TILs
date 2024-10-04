@@ -53,11 +53,10 @@ for _ in range(k):
             is_game_over = True
             break
         
-        if [x,y] in snake:
-            is_game_over = True
-            break
-        
         if len(snake) == 1:
+            snake[0][0] = x
+            snake[0][1] = y
+
             if a[x][y] == 2:
                 if d == "R":
                     snake.append([snake[0][0], snake[0][1]-1])
@@ -72,12 +71,16 @@ for _ in range(k):
         else:
             snake.insert(0, [x,y])
 
+                
             if a[x][y] == 2:
                 a[x][y] = 0
-
             else:
                 snake.pop()
-
+                if snake.count([x,y]) > 1:
+                    is_game_over = True
+                    break
+            
+    
     if is_game_over:
         break
 
