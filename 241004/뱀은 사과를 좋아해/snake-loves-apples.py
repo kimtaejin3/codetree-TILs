@@ -79,4 +79,4 @@ for _ in range(k):
             else:
                 snake.pop()
 
-print(elapsed_time)
+print(elapsed_time-2)
