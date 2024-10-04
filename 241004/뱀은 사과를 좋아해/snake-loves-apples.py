@@ -6,7 +6,7 @@ a = [
 ]
 
 def in_range(x,y):
-    return 0 <= x < n and 0 <= y < n
+    return 1 <= x <= n and 1 <= y <= n
 
 def get(d):
     if d == "R":
@@ -31,8 +31,6 @@ elapsed_time = 0
 x, y = 1,1
 snake = [[1,1]]
 ds = []
-# 중요!! 
-# 머리만 이동시키고 나머지는 그대로 복사
 
 for _ in range(k):
     d, p = input().split()
@@ -44,6 +42,8 @@ for _ in range(k):
 
     x, y = snake[0][0], snake[0][1]
 
+    is_game_over = False
+
     for i in range(p):
         elapsed_time += 1
         
@@ -53,7 +53,7 @@ for _ in range(k):
             break
         
         if [x,y] in snake:
-            elapsed_time -= 1
+            is_game_over = True
             break
         
         if len(snake) == 1:
@@ -69,11 +69,6 @@ for _ in range(k):
                 
                 a[x][y] = 1
         else:
-            if [x,y] in snake:
-                elapsed_time -= 1
-
-                break
-
             snake.insert(0, [x,y])
 
             if a[x][y] == 2:
@@ -81,5 +76,9 @@ for _ in range(k):
 
             else:
                 snake.pop()
+
+    if is_game_over:
+        break
+
 
 print(elapsed_time)
