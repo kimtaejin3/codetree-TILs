@@ -50,6 +50,7 @@ for _ in range(k):
         x, y = x + dx, y + dy
 
         if not in_range(x,y):
+            is_game_over = True
             break
         
         if [x,y] in snake:
