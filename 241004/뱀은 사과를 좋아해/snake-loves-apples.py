@@ -58,13 +58,13 @@ for _ in range(k):
         if len(snake) == 1:
             if a[x][y] == 2:
                 if d == "R":
-                    snake.append([snake[0], snake[1]-1])
+                    snake.append([snake[0][0], snake[0][1]-1])
                 elif d == "L":
-                    snake.append([snake[0], snake[1]+1])
+                    snake.append([snake[0][0], snake[0][1]+1])
                 elif d == "D":
-                    snake.append([snake[0]-1, snake[1]])
+                    snake.append([snake[0][0]-1, snake[0][1]])
                 elif d == "U":
-                    snake.append([snake[0]+1, snake[1]])
+                    snake.append([snake[0][0]+1, snake[0][1]])
                 
                 a[x][y] = 1
         else:
