@@ -53,6 +53,7 @@ for _ in range(k):
             break
         
         if [x,y] in snake:
+            elapsed_time -= 1
             break
         
         if len(snake) == 1:
@@ -69,6 +70,8 @@ for _ in range(k):
                 a[x][y] = 1
         else:
             if [x,y] in snake:
+                elapsed_time -= 1
+
                 break
 
             snake.insert(0, [x,y])
@@ -79,4 +82,4 @@ for _ in range(k):
             else:
                 snake.pop()
 
-print(elapsed_time-2)
+print(elapsed_time)
