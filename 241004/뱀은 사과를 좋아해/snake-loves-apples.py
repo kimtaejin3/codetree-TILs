@@ -35,14 +35,15 @@ ds = []
 # 머리만 이동시키고 나머지는 그대로 복사
 
 for _ in range(k):
-    d, p = tuple(map(int,input().split()))
+    d, p = input().split()
+    p = int(p)
 
     ds.append(d)
     dx, dy = get(d)
     past_d = ds[len(ds)-2]
 
     x, y = snake[0][0], snake[0][1]
-    
+
     for i in range(p):
         elapsed_time += 1
         
@@ -77,3 +78,5 @@ for _ in range(k):
 
             else:
                 snake.pop()
+
+print(elapsed_time)
