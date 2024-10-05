@@ -32,7 +32,6 @@ def move():
     while True:
         elapsed_time += 1
         x, y = x + dxs[d], y + dys[d]
-
         if x < 1 or x >= scaled_n - 1 or y < 1 or y >= scaled_n - 1:
             break
 
@@ -42,9 +41,9 @@ def move():
             elif d == 1:
                 d = 2
             elif d == 2:
-                d = 0
-            elif d == 3:
                 d = 1
+            elif d == 3:
+                d = 0
 
         elif a[x][y] == 2:
             if d == 0:
