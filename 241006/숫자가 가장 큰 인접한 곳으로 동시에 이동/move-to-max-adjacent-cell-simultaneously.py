@@ -23,7 +23,7 @@ for _ in range(m):
 
 def get_next_pos(r, c):
     
-    next_pos = [-1,-1]
+    next_pos = [r,c]
     max_val = grid[r][c]
 
     for dx, dy in zip(dxs, dys):
@@ -51,6 +51,7 @@ def move_all():
 
                 if next_count[nr][nc] > 1:
                     next_count[nr][nc] = 0
+                    print('bomb:',(nr,nc))
     
     for i in range(n):
         for j in range(n):
