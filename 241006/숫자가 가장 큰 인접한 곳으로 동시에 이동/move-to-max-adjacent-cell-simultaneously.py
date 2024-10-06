@@ -23,8 +23,8 @@ for _ in range(m):
 
 def get_next_pos(r, c):
     
-    next_pos = [r,c]
-    max_val = grid[r][c]
+    next_pos = [-1,-1]
+    max_val = -1
 
     for dx, dy in zip(dxs, dys):
         nr, nc = r + dx, c + dy
