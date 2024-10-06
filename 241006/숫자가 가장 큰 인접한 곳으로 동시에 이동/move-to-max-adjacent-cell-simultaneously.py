@@ -36,7 +36,6 @@ def get_next_pos(r, c):
     
     return (next_pos[0], next_pos[1])
 
-
 def move_all():
     for i in range(n):
         for j in range(n):
@@ -44,17 +43,19 @@ def move_all():
     
     for i in range(n):
         for j in range(n):
-            if count[i][j] == 1:
+            if count[i][j]:
                 nr, nc = get_next_pos(i,j)
-
                 next_count[nr][nc] += 1
 
-                if next_count[nr][nc] > 1:
-                    next_count[nr][nc] = 0
-    
+    for i in range(n):
+        for j in range(n):
+            if next_count[i][j] > 1:
+                next_count[i][j] = 0
+            
     for i in range(n):
         for j in range(n):
             count[i][j] = next_count[i][j]
+
 
 for _ in range(t):
     move_all()
@@ -63,7 +64,7 @@ ans = 0
 
 for i in range(n):
     for j in range(n):
-        if count[i][j] == 1:
+        if count[i][j]:
             ans += 1
 
 print(ans)
