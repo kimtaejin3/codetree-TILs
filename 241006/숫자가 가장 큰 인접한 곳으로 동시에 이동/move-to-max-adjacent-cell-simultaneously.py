@@ -21,6 +21,9 @@ for _ in range(m):
     r, c = tuple(map(int,input().split()))
     count[r-1][c-1] = 1
 
+def in_range(x, y):
+    return 0 <= x <= n - 1 and 0 <= y <= n - 1
+
 def get_next_pos(r, c):
     
     next_pos = [-1,-1]
@@ -28,9 +31,8 @@ def get_next_pos(r, c):
 
     for dx, dy in zip(dxs, dys):
         nr, nc = r + dx, c + dy
-        if nr < 0 or nr > n - 1 or nc < 0 or nc > n - 1:
-            continue
-        if grid[nr][nc] > max_val:
+        
+        if in_range(nr,nc) and grid[nr][nc] > max_val:
             max_val = grid[nr][nc]
             next_pos[0], next_pos[1] = nr, nc
     
