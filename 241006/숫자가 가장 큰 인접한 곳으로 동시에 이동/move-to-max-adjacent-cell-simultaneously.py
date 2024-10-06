@@ -56,7 +56,7 @@ def move_all():
         for j in range(n):
             count[i][j] = next_count[i][j]
 
-for _ in range(t):
+for _ in range(t+1):
     move_all()
 
 ans = 0
