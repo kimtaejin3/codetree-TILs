@@ -51,7 +51,6 @@ def move_all():
 
                 if next_count[nr][nc] > 1:
                     next_count[nr][nc] = 0
-                    print('bomb:',(nr,nc))
     
     for i in range(n):
         for j in range(n):
