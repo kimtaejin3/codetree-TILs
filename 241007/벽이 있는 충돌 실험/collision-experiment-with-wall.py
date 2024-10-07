@@ -82,11 +82,11 @@ for _ in range(T):
         move_all()
 
 
-ans = 0
+    ans = 0
 
-for i in range(n):
-    for j in range(n):
-        if grid[i][j][0] == 1:
-            ans += 1
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j][0] == 1:
+                ans += 1
 
-print(ans)
+    print(ans)
