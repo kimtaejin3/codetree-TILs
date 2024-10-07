@@ -38,9 +38,10 @@ def swap(x,y):
     a[tx][ty] = temp
 
 
-for num in range(1, n * n + 1):
-    x, y = get_pos(num)
-    swap(x,y)
+for i in range(m):
+    for num in range(1, n * n + 1):
+        x, y = get_pos(num)
+        swap(x,y)
 
 for i in range(n):
     for j in range(n):
