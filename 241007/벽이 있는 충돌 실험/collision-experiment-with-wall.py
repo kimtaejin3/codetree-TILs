@@ -35,7 +35,7 @@ def move(x, y, d):
         next_grid[next_x][next_y] = (next_grid[next_x][next_y][0] + 1, d)
     else:
         nd = oppose_d(d)
-        next_grid[x][y] = (1, nd)
+        next_grid[x][y] = (next_grid[x][y][0] + 1, nd)
 
 def move_all():
     global grid, next_grid
@@ -59,6 +59,12 @@ def move_all():
         for j in range(n):
             grid[i][j] = next_grid[i][j]
 
+# def print_grid():
+    # for i in range(n):
+        # for j in range(n):
+            # print(grid[i][j], end=' ')
+        # print()
+
 for _ in range(T):
     n, m = map(int,input().split())
 
@@ -78,8 +84,13 @@ for _ in range(T):
 
         grid[x][y] = (1,d)
     
+    # print_grid()
+    # print('== == == == ==')
+
     for __ in range(n*2):
         move_all()
+        # print_grid()
+        # print('== == == == ==')
 
 
     ans = 0
