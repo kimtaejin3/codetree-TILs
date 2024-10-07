@@ -24,7 +24,7 @@ def oppose_d(d):
     elif d == "L":
         return "R"
     elif d == "R":
-        return L
+        return "L"
 
 def move(x, y, d):
     global next_grid
