@@ -51,11 +51,6 @@ for _ in range(T):
         for _ in range(n)
     ]
 
-    next_grid = [
-        [(0, 0) for _ in range(n)]
-        for _ in range(n)
-    ]
-    
     for __ in range(m):
         x, y, d = input().split()
         x, y = int(x) - 1, int(y) - 1
