@@ -18,14 +18,15 @@ nums = list(map(int,input().split()))
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
-def find_pos(num):
+def get_pos(num):
     for i in range(n):
         for j in range(n):
             if num in a[i][j]:
                 return (i, j)
 
-def find_max_pos(x, y):
-    dxs, dys = [-1, -1, -1, 0, 1, 1, 1, 0],[-1, 0, 1, 1, 1, 0, -1, -1]
+def next_pos(x, y):
+    dxs = [-1, -1, -1, 0, 1, 1, 1, 0]
+    dys = [-1, 0, 1, 1, 1, 0, -1, -1]
 
     max_val, max_pos = -1, (-1, -1)
 
@@ -57,8 +58,8 @@ def swap(pos1, pos2, num):
 
 def simulate():
     for num in nums:
-        x, y = find_pos(num)
-        tx, ty = find_max_pos(x, y)
+        x, y = get_pos(num)
+        tx, ty = next_pos(x, y)
         if tx == -1 and ty == -1:
             continue
           
