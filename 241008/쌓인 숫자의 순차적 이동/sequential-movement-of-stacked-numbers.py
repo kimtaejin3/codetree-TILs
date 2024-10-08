@@ -18,12 +18,6 @@ nums = list(map(int,input().split()))
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
-# def print_a():
-    # for i in range(n):
-        # for j in range(n):
-            # print(a[i][j], end=' ')
-        # print()
-
 def find_pos(num):
     for i in range(n):
         for j in range(n):
@@ -38,7 +32,6 @@ def find_max_pos(x, y):
     for dx, dy in zip(dxs, dys):
         next_x, next_y = x + dx, y + dy
 
-        #                               리스트 앞은 위쪽임
         if in_range(next_x, next_y) and len(a[next_x][next_y]) > 0 and max(a[next_x][next_y]) > max_val:
             max_val = max(a[next_x][next_y])
             max_pos = (next_x, next_y)
@@ -70,9 +63,6 @@ def simulate():
             continue
           
         swap((x,y), (tx,ty), num)
-
-        # print('== == =('+ str(num) +')= == ==')
-        # print_a()
 
 simulate()
 
