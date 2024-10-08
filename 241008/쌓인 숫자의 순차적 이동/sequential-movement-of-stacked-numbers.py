@@ -18,6 +18,12 @@ nums = list(map(int,input().split()))
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
+# def print_a():
+    # for i in range(n):
+        # for j in range(n):
+            # print(a[i][j], end=' ')
+        # print()
+
 def find_pos(num):
     for i in range(n):
         for j in range(n):
@@ -60,8 +66,9 @@ def simulate():
     for num in nums:
         x, y = find_pos(num)
         tx, ty = find_max_pos(x, y)
+        if tx == -1 and ty == -1:
+            break
         swap((x,y), (tx,ty), num)
-    
 
 simulate()
 
