@@ -64,6 +64,8 @@ def simulate():
     reflect_marbles_on_grid()
     remove_collision_marbles()
 
+    
+
 n, m, t, k = tuple(map(int, input().split()))
 
 grid = [
