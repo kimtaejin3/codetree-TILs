@@ -43,7 +43,7 @@ def move_all():
             if in_range(next_r, next_c):
                 r, c = next_r, next_c
 
-                next_next_r, next_next_c = next_r + dxs[d], next_c + dys[d]
+                next_next_r, next_next_c = r + dxs[d], c + dys[d]
 
                 if not in_range(next_next_r, next_next_c):
                     d = 3 - d
