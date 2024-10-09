@@ -52,7 +52,6 @@ def move_all():
     
     marbles = sorted(new_marbles, key = lambda x: (x[0], x[1], x[3], x[4]))
         
-        
 def simulate():
     global grid
 
