@@ -6,17 +6,18 @@ mapper = {
 }
 
 def in_range(r, c):
+    global n
     return 0 <= r < n and 0 <= c < n
 
 def reflect_marbles_on_grid():
     global grid, marbles
 
     for marble in marbles:
-        r, c, d, v, n = marble
+        r, c, d, v, num = marble
         grid[r][c] += 1
 
 def remove_collision_marbles():
-    global grid, marbles, k
+    global grid, marbles, k, n
 
     for i in range(n):
         for j in range(n):
@@ -35,7 +36,7 @@ def move_all():
     new_marbles = []
 
     for marble in marbles:
-        r, c, d, v, n = marble
+        r, c, d, v, num = marble
 
         for _ in range(v):
             next_r, next_c = r + dxs[d], c + dys[d]
@@ -47,8 +48,12 @@ def move_all():
 
                 if not in_range(next_next_r, next_next_c):
                     d = 3 - d
+            else:
+                d = 3 - d
+                r += dxs[d]
+                c += dys[d]
         
-        new_marbles.append((r, c, d, v, n))
+        new_marbles.append((r, c, d, v, num))
     
     marbles = sorted(new_marbles, key = lambda x: (x[3], x[4]))
         
@@ -73,11 +78,9 @@ grid = [
 
 marbles = []
 
-
 for i in range(1,m+1):
     r, c, d, v = tuple(input().split())
     marbles.append((int(r)-1, int(c)-1, mapper[d], int(v), i))
-
 
 for _ in range(t):
     simulate()
