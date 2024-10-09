@@ -79,7 +79,7 @@ for i in range(1,m+1):
     marbles.append((int(r)-1, int(c)-1, mapper[d], int(v), i))
 
 
-for _ in range(t+1):
+for _ in range(t):
     simulate()
 
 print(len(marbles))
