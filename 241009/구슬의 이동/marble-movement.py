@@ -50,8 +50,8 @@ def move_all():
                     d = 3 - d
             else:
                 d = 3 - d
-                r += dxs[d]
-                c += dys[d]
+                # r += dxs[d]
+                # c += dys[d]
         
         new_marbles.append((r, c, d, v, num))
     
