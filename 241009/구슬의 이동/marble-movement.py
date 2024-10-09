@@ -50,7 +50,7 @@ def move_all():
         
         new_marbles.append((r, c, d, v, n))
     
-    marbles = sorted(new_marbles, key = lambda x: (x[3], x[4]))
+    marbles = sorted(new_marbles, key = lambda x: (x[3], -x[4]))
         
 def simulate():
     global grid
