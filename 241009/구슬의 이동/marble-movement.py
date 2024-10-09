@@ -50,7 +50,7 @@ def move_all():
         
         new_marbles.append((r, c, d, v, n))
     
-    marbles = sorted(new_marbles, key = lambda x: (x[3], -x[4]))
+    marbles = sorted(new_marbles, key = lambda x: (x[3], x[4]))
         
 def simulate():
     global grid
@@ -63,8 +63,6 @@ def simulate():
     move_all()
     reflect_marbles_on_grid()
     remove_collision_marbles()
-
-    
 
 n, m, t, k = tuple(map(int, input().split()))
 
@@ -81,7 +79,7 @@ for i in range(1,m+1):
     marbles.append((int(r)-1, int(c)-1, mapper[d], int(v), i))
 
 
-for _ in range(t):
+for _ in range(t+1):
     simulate()
 
 print(len(marbles))
