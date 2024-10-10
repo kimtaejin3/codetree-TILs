@@ -101,3 +101,5 @@ for _ in range(T):
         for x in range(OFFSET * 2 + 1):
             for y in range(OFFSET * 2 + 1):
                 a[x][y] = next_a[x][y]
+
+print(ans)
