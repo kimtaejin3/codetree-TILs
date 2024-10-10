@@ -1,4 +1,4 @@
-OFFSET = 5
+OFFSET = 2000
 
 N = OFFSET * 2
 T = int(input())
