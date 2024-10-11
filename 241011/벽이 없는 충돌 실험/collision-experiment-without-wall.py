@@ -4,10 +4,10 @@ N = OFFSET * 2
 T = int(input())
 
 direction_mapper = {
-    "U": 3,
-    "L": 1,
-    "R": 2,
-    "D": 0,
+    'U': 0,
+    'R': 1,
+    'L': 2,
+    'D': 3
 }
 
 def in_range(x, y):
@@ -16,7 +16,7 @@ def in_range(x, y):
 def move_all():
     global marbles
 
-    dxs, dys = [-1, 0, 0, 1], [0, -1, 1, 0]
+    dxs, dys = [0, 1, -1, 0], [1, 0, 0, -1]
 
     new_marbles = []
 
