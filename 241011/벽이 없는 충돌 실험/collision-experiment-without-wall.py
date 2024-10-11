@@ -30,6 +30,11 @@ def move_all():
 
     marbles = new_marbles
 
+next_marble_index = [
+    [-1 for _ in range(N + 1)]
+    for _ in range(N + 1)
+]
+
 for _ in range(T):
 
     n = int(input())
@@ -44,25 +49,28 @@ for _ in range(T):
     for i in range(0, N + 1):
         move_all()
         flag = False
-        grid = {}
+ 
+        next_marbles = []
 
         for marble in marbles:
             x, y, w, n, d = marble
 
-            if not (x,y) in grid:
-                grid[(x,y)] = (w, n, d)
+            if next_marble_index[x][y] == -1:
+                next_marbles.append((x, y, w, n, d))
+                next_marble_index[x][y] = len(next_marbles) - 1
             else:
                 flag = True
-                tw, tn, td = grid[(x,y)]
+                index = next_marble_index[x][y]
+                tx, ty, tw, tn, td = next_marbles[index]
                 if w > tw or (w == tw and n > tn):
-                    grid[(x,y)] = (w, n, d)
+                    next_marbles[index] = (tx, ty, tw, tn, td)
+
+        marbles = next_marbles[:]
+
+        for x, y, _, _, _ in next_marbles:
+            next_marble_index[x][y] = - 1
         
-        new_marbles = []
-
-        for x, y in grid:
-            new_marbles.append((x, y, grid[(x,y)][0],  grid[(x,y)][1],  grid[(x,y)][2]))
-
-        marbles = new_marbles[:]
+        next_marbles = []
 
         if flag:
             ans = i + 1
