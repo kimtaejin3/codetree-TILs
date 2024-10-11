@@ -34,7 +34,7 @@ def move_all():
                 tx,ty,tw,tn,td = marbles[i]
 
                 if tx == next_x and ty == next_y and td == 3 - d:
-                    flag = True
+                    is_collide = True
                     if w < tw:
                         flag = True
                     elif w == tw and n < tn:
