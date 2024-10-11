@@ -16,7 +16,7 @@ def in_range(x, y):
 def move_all():
     global marbles
 
-    dxs, dys = [-0.5, 0, 0, 0.5], [0, -0.5, 0.5, 0]
+    dxs, dys = [-1, 0, 0, 1], [0, -1, 1, 0]
 
     new_marbles = []
 
@@ -37,7 +37,7 @@ for _ in range(T):
 
     for i in range(n):
         x, y, w, d = input().split()
-        marbles.append((int(y) + OFFSET, int(x) + OFFSET, int(w), i+1, direction_mapper[d]))
+        marbles.append((int(y) * 2 + OFFSET, int(x) * 2 + OFFSET, int(w), i+1, direction_mapper[d]))
     
     ans = -1
 
