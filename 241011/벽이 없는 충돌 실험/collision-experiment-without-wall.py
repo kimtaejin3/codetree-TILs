@@ -16,7 +16,7 @@ def in_range(x, y):
 def move_all():
     global marbles
 
-    dxs, dys = [-1, 0, 0, 1], [0, -1, 1, 0]
+    dxs, dys = [-0.5, 0, 0, 0.5], [0, -0.5, 0.5, 0]
 
     is_collide = False
 
@@ -28,20 +28,21 @@ def move_all():
         next_x, next_y = x + dxs[d], y + dys[d]
 
         if in_range(next_x, next_y):
-            flag = False
+            new_marbles.append((next_x, next_y, w, n, d))
+            # flag = False
 
-            for i in range(len(marbles)):
-                tx,ty,tw,tn,td = marbles[i]
+            # for i in range(len(marbles)):
+            #     tx,ty,tw,tn,td = marbles[i]
 
-                if tx == next_x and ty == next_y and td == 3 - d:
-                    is_collide = True
-                    if w < tw:
-                        flag = True
-                    elif w == tw and n < tn:
-                        flag = True
+            #     if tx == next_x and ty == next_y and td == 3 - d:
+            #         is_collide = True
+            #         if w < tw:
+            #             flag = True
+            #         elif w == tw and n < tn:
+            #             flag = True
             
-            if not flag:
-                new_marbles.append((next_x, next_y, w, n, d))
+            # if not flag:
+            #     new_marbles.append((next_x, next_y, w, n, d))
 
     marbles = new_marbles
     return is_collide
@@ -57,12 +58,14 @@ for _ in range(T):
     
     ans = -1
 
-    for i in range(0, N + 1, 2):
-        
+    for i in range(0, N * 2 + 1):
+        # print('==')
+        # print(marbles)
         flag1 = move_all()
+        # print(marbles)
+        # print('==')
         flag2 = False
         grid = {}
-
 
         for marble in marbles:
             x, y, w, n, d = marble
@@ -82,12 +85,11 @@ for _ in range(T):
 
                     if (x, y, w, n, d) in marbles:
                         marbles.remove((x, y, w, n, d))
-
-
-        if flag1:
-            ans = i + 2 - 1
+        
+        # if flag1:
+        #     ans = i + 2 - 1
         
         if flag2:
-            ans = i + 2
+            ans = i + 1
 
     print(ans)
