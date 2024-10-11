@@ -42,7 +42,7 @@ for _ in range(T):
 
     for i in range(n):
         x, y, w, d = input().split()
-        marbles.append((int(y) * 2 + OFFSET, int(x) * 2 + OFFSET, int(w), i+1, direction_mapper[d]))
+        marbles.append((int(x) * 2 + OFFSET, int(y) * 2 + OFFSET, int(w), i+1, direction_mapper[d]))
     
     ans = -1
 
@@ -68,7 +68,7 @@ for _ in range(T):
         marbles = next_marbles[:]
 
         for x, y, _, _, _ in next_marbles:
-            next_marble_index[x][y] = - 1
+            next_marble_index[x][y] = -1
         
         next_marbles = []
 
