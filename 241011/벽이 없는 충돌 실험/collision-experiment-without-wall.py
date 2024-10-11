@@ -18,8 +18,6 @@ def move_all():
 
     dxs, dys = [-0.5, 0, 0, 0.5], [0, -0.5, 0.5, 0]
 
-    is_collide = False
-
     new_marbles = []
 
     for marble in marbles:
@@ -31,7 +29,6 @@ def move_all():
             new_marbles.append((next_x, next_y, w, n, d))
 
     marbles = new_marbles
-    return is_collide
 
 for _ in range(T):
 
@@ -45,8 +42,8 @@ for _ in range(T):
     ans = -1
 
     for i in range(0, N + 1):
-        flag1 = move_all()
-        flag2 = False
+        move_all()
+        flag = False
         grid = {}
 
         for marble in marbles:
@@ -55,23 +52,19 @@ for _ in range(T):
             if not (x,y) in grid:
                 grid[(x,y)] = (w, n, d)
             else:
-                flag2 = True
+                flag = True
                 tw, tn, td = grid[(x,y)]
                 if w > tw or (w == tw and n > tn):
                     grid[(x,y)] = (w, n, d)
-
-                    if (x, y, tw, tn, td) in marbles:
-                        marbles.remove((x, y, tw, tn, td))
-                else:
-                    grid[(x,y)] = (tw, tn, td)
-
-                    if (x, y, w, n, d) in marbles:
-                        marbles.remove((x, y, w, n, d))
         
-        # if flag1:
-        #     ans = i + 2 - 1
-        
-        if flag2:
+        new_marbles = []
+
+        for x, y in grid:
+            new_marbles.append((x, y, grid[(x,y)][0],  grid[(x,y)][1],  grid[(x,y)][2]))
+
+        marbles = new_marbles
+
+        if flag:
             ans = i + 1
 
     print(ans)
