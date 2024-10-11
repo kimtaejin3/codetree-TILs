@@ -47,7 +47,6 @@ def move_all():
     return is_collide
 
 for _ in range(T):
-    grid = {}
 
     n = int(input())
     marbles = []
@@ -62,6 +61,8 @@ for _ in range(T):
         
         flag1 = move_all()
         flag2 = False
+        grid = {}
+
 
         for marble in marbles:
             x, y, w, n, d = marble
@@ -82,7 +83,7 @@ for _ in range(T):
                     if (x, y, w, n, d) in marbles:
                         marbles.remove((x, y, w, n, d))
 
-        
+
         if flag1:
             ans = i + 2 - 1
         
