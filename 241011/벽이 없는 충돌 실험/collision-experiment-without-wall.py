@@ -61,8 +61,8 @@ for _ in range(T):
                     grid[(x,y)] = (w, n, d)
                     marbles.remove((x, y, tw, tn, td))
                 else:
-                    gird[(x,y)] = (tw, tn, td)
-                    marbles.remove((x, t, w, n, d))
+                    grid[(x,y)] = (tw, tn, td)
+                    marbles.remove((x, y, w, n, d))
 
         
         if flag1:
