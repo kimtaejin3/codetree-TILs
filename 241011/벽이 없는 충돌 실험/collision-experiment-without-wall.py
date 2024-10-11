@@ -28,9 +28,23 @@ def move_all():
         next_x, next_y = x + dxs[d], y + dys[d]
 
         if in_range(next_x, next_y):
-            new_marbles.append((next_x, next_y, w, n, d))
-    
+            flag = False
+
+            for i in range(len(marbles)):
+                tx,ty,tw,tn,td = marbles[i]
+
+                if tx == next_x and ty == next_y and td == 3 - d:
+                    flag = True
+                    if w < tw:
+                        flag = True
+                    elif w == tw and n < tn:
+                        flag = True
+            
+            if not flag:
+                new_marbles.append((next_x, next_y, w, n, d))
+
     marbles = new_marbles
+    return is_collide
 
 for _ in range(T):
     grid = {}
