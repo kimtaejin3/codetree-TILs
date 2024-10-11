@@ -62,7 +62,7 @@ for _ in range(T):
         for x, y in grid:
             new_marbles.append((x, y, grid[(x,y)][0],  grid[(x,y)][1],  grid[(x,y)][2]))
 
-        marbles = new_marbles
+        marbles = new_marbles[:]
 
         if flag:
             ans = i + 1
