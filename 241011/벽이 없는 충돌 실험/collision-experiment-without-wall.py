@@ -1,7 +1,8 @@
 OFFSET = 2000
-N = OFFSET * 2
 
-# 방향 매핑
+N = OFFSET * 2
+T = int(input())
+
 direction_mapper = {
     "U": 3,
     "L": 1,
@@ -15,63 +16,62 @@ def in_range(x, y):
 def move_all():
     global marbles
 
-    # 이동 방향에 따른 변화량 (0.5 단위로 움직임)
     dxs, dys = [-0.5, 0, 0, 0.5], [0, -0.5, 0.5, 0]
-    
-    new_marbles = dict()
+
+    is_collide = False
+
+    new_marbles = []
 
     for marble in marbles:
-        if marbles[marble]:
-            continue  # 이미 충돌한 구슬은 무시
-
         x, y, w, n, d = marble
+
         next_x, next_y = x + dxs[d], y + dys[d]
 
         if in_range(next_x, next_y):
-            new_marbles[(next_x, next_y, w, n, d)] = False
+            new_marbles.append((next_x, next_y, w, n, d))
 
     marbles = new_marbles
-
-# 테스트 케이스 입력 처리
-T = int(input())
+    return is_collide
 
 for _ in range(T):
+
     n = int(input())
-    marbles = dict()
+    marbles = []
 
     for i in range(n):
         x, y, w, d = input().split()
-        marbles[(int(y) + OFFSET, int(x) + OFFSET, int(w), i+1, direction_mapper[d])] = False
+        marbles.append((int(y) + OFFSET, int(x) + OFFSET, int(w), i+1, direction_mapper[d]))
     
     ans = -1
 
-    # 최대 N번 반복
     for i in range(0, N + 1):
-        move_all()  # 구슬 이동
-        flag = False
+        flag1 = move_all()
+        flag2 = False
         grid = {}
 
-        # 구슬 충돌 체크
         for marble in marbles:
-            if marbles[marble]:
-                continue  # 이미 충돌한 구슬은 무시
-
             x, y, w, n, d = marble
 
-            if not (x, y) in grid:
-                grid[(x, y)] = (w, n, d)  # 구슬 위치 기록
+            if not (x,y) in grid:
+                grid[(x,y)] = (w, n, d)
             else:
-                flag = True  # 충돌 발생
-                tw, tn, td = grid[(x, y)]
-
-                # 더 강한 구슬이 남아야 함
+                flag2 = True
+                tw, tn, td = grid[(x,y)]
                 if w > tw or (w == tw and n > tn):
-                    grid[(x, y)] = (w, n, d)
-                    marbles[(x, y, tw, tn, td)] = True  # 약한 구슬 충돌 처리
+                    grid[(x,y)] = (w, n, d)
+
+                    if (x, y, tw, tn, td) in marbles:
+                        marbles.remove((x, y, tw, tn, td))
                 else:
-                    marbles[(x, y, w, n, d)] = True  # 현재 구슬 충돌 처리
+                    grid[(x,y)] = (tw, tn, td)
+
+                    if (x, y, w, n, d) in marbles:
+                        marbles.remove((x, y, w, n, d))
         
-        if flag:
-            ans = i + 1  # 충돌이 발생한 시점 기록
+        # if flag1:
+        #     ans = i + 2 - 1
+        
+        if flag2:
+            ans = i + 1
 
     print(ans)
