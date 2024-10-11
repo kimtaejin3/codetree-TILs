@@ -58,10 +58,10 @@ for _ in range(T):
                 flag2 = True
                 tw, tn, td = grid[(x,y)]
                 if w > tw or (w == tw and n > tn):
-                    grid(x,y) = (w, n, d)
+                    grid[(x,y)] = (w, n, d)
                     marbles.remove((x, y, tw, tn, td))
                 else:
-                    gird(x,y) = (tw, tn, td)
+                    gird[(x,y)] = (tw, tn, td)
                     marbles.remove((x, t, w, n, d))
 
             grid[y][x] += 1
