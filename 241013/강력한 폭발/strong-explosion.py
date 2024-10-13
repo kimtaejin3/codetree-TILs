@@ -96,7 +96,6 @@ def func(lev):
     for k in range(1, 4):
         bombs[lev][2] = k
         func(lev + 1)
-        bombs[lev][2] = 1
 
 func(0)
 
