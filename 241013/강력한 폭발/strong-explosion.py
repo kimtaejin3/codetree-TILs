@@ -24,13 +24,14 @@ def explode(x, y, k):
     if k == 1:
 
         for i in range(2):
-            next_x, next_y = x - 1, y
+            next_x, next_y = x - i - 1, y
 
             if next_x > -1:
                 next_a[next_x][next_y] = 1
+            
         
         for i in range(2):
-            next_x, next_y = x + 1, y
+            next_x, next_y = x + i + 1, y
 
             if next_x < n:
                 next_a[next_x][next_y] = 1
