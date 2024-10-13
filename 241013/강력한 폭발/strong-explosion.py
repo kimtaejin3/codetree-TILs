@@ -11,10 +11,11 @@ next_a = [
 ]
 
 bomb_cnt = 0
-
+bombs = []
 for x in range(n):
     for y in range(n):
         if a[x][y]:
+            bombs.append([x,y,1])
             bomb_cnt += 1
 
 def explode(x, y, k):
@@ -66,10 +67,10 @@ def explode(x, y, k):
             next_a[four[0]][four[1]] = 1
 
 def explode_all():
-    for x in range(n):
-        for y in range(n):
-            if a[x][y] > 0:
-                explode(x, y, a[x][y])
+    for bomb in bombs:
+        x, y, k = bomb
+        if a[x][y] > 0:
+            explode(x, y, k)
 
 ans = 0
 
@@ -82,21 +83,20 @@ def func(lev):
         for x in range(n):
             for y in range(n):
                 cnt += next_a[x][y]
+
         ans = max(ans, cnt)
+
         for x in range(n):
             for y in range(n):
                 next_a[x][y] = 0
         return
 
     # recursive case
-    for x in range(n):
-        for y in range(n):
-            if a[x][y] == 1:
-                for k in range(2, 5):
-                    a[x][y] = k
-                    func(lev + 1)
-                    a[x][y] = 1
-
+    
+    for k in range(1, 4):
+        bombs[lev][2] = k
+        func(lev + 1)
+        bombs[lev][2] = k
 
 func(0)
 
