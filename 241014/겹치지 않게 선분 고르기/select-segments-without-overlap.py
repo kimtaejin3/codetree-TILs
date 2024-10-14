@@ -1,31 +1,40 @@
 n = int(input())
 
-a = [
-    tuple(map(int,input().split()))
+segments = [
+    tuple(map(int, input().split()))
     for _ in range(n)
 ]
 
-choose = []
 ans = 0
+selected_segs = list()
 
-def func(index, lev, length):
+def overlapped(seg1, seg2):
+    (ax1, ax2), (bx1, bx2) = seg1, seg2
+
+    return (ax1 <= bx1 and bx1 <= ax2) or (ax1 <= bx2 and bx2 <= ax2) or \
+           (bx1 <= ax1 and ax1 <= bx2) or (bx1 <= ax2 and ax2 <= bx2)
+
+def possible():
+    for i, seg1 in enumerate(selected_segs):
+        for j, seg2 in enumerate(selected_segs):
+            if i < j and overlapped(seg1, seg2):
+                return False
+    
+    return True
+
+def find_max_segments(cnt):
     global ans
 
-    if lev == length:
-        ans = max(ans, length)
-        return
+    if cnt == n:
+        if possible():
+            ans = max(ans, len(selected_segs))
+            return
 
+    selected_segs.append(segments[cnt])
+    find_max_segments(cnt + 1)
+    selected_segs.pop()
 
-    for i in range(index, n):
-        if (not choose) or choose[-1][1] < a[index][0]:
-            choose.append(a[index])
-            func(i+1, lev+1, length)
-            choose.pop()
+    find_max_segments(cnt + 1)
 
-
-a.sort(key=lambda x:x[1])
-
-for i in range(1, n+1):
-    func(0, 0, i)
-
+find_max_segments(0)
 print(ans)
