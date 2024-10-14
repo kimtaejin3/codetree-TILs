@@ -5,15 +5,25 @@ a = [
     for _ in range(n)
 ]
 
-a = sorted(a, key = lambda x:x[1])
+choose = []
+ans = 0
 
-ans = 1
+def func(index, lev, length):
+    global ans
 
-last = a[0][1]
+    if lev == length:
+        ans = max(ans, length)
+        return
 
-for i in range(1, len(a)):
-    if last < a[i][0]:
-        last = a[i][1]
-        ans += 1
+
+    for i in range(index, n):
+        if (not choose) or choose[-1][1] < a[index][0]:
+            choose.append(a[index])
+            func(i+1, lev+1, length)
+            choose.pop()
+
+
+for i in range(1, n+1):
+    func(0, 0, i)
 
 print(ans)
