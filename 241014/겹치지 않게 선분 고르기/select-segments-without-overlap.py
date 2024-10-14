@@ -23,6 +23,7 @@ def func(index, lev, length):
             choose.pop()
 
 
+a.sort()
 for i in range(1, n+1):
     func(0, 0, i)
 
