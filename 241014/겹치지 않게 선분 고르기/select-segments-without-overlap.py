@@ -28,7 +28,7 @@ def find_max_segments(cnt):
     if cnt == n:
         if possible():
             ans = max(ans, len(selected_segs))
-            return
+        return
 
     selected_segs.append(segments[cnt])
     find_max_segments(cnt + 1)
