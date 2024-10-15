@@ -1,57 +1,44 @@
-import sys
+n, m = tuple(map(int, input().split()))
 
-n, m = map(int, input().split())
+lines = list()
+selected_lines = list()
 
-a = []
-choose = []
-origin = []
+ans = m
 
-for i in range(m):
-    a.append(tuple(map(int, input().split())))
+def possible():
+    num1, num2 = [i for i in range(n)], [i for i in range(n)]
 
-def move(col, arr, ans):
-
-    pos = (1, col)
-
-    x, y = pos[0], pos[1]
-
-    while x <= 15:
-        if (y, x) in arr:
-            y += 1
-        elif (y-1, x) in arr:
-            y -= 1
-        
-        x += 1
+    for _, idx in lines:
+        num1[idx], num1[idx + 1] = num1[idx + 1], num1[idx]
     
-    ans.append(y)
-
-ans = sys.maxsize
-
-def simulate(arr):
-    ans = []
+    for _, idx in selected_lines:
+        num2[idx], num2[idx + 1] = num2[idx + 1], num2[idx]
+    
     for i in range(n):
-        move(i+1, arr, ans)
-    return ans[:]
-
-origin = simulate(a)
-
-def func(index, lev, n):
-    global ans 
-
-    if lev == n:
-        temp = simulate(choose)
-
-        if temp == origin:
-            ans = min(ans, lev)
-
-        return False
+        if num1[i] != num2[i]:
+            return False
     
-    for i in range(index, m):
-        choose.append(a[i])
-        func(i + 1, lev + 1, n)
-        choose.pop()
+    return True
 
-for i in range(m+1):
-    func(0, 0, i)
+def find_min_lines(cnt):
+    global ans
 
+    if cnt == m:
+        if possible():
+            ans = min(ans, len(selected_lines))
+        return
+    
+    selected_lines.append(lines[cnt])
+    find_min_lines(cnt + 1)
+    selected_lines.pop()
+
+    find_min_lines(cnt + 1)
+
+for _ in range(m):
+    a, b = tuple(map(int, input().split()))
+    lines.append((b, a - 1))
+
+lines.sort()
+
+find_min_lines(0)
 print(ans)
