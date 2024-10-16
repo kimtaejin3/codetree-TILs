@@ -64,7 +64,7 @@ def cal():
                 #     s.pop(0)
                 get_new_s(s, 0)
                 
-                # print(new_s)
+                print(new_s)
 
                 # 으아!!!! maxVal 말고 새로운 s 넘어오게....
                 # print(max_val)
@@ -83,9 +83,9 @@ ans = -1
 def func(lev):
     global ans
     if lev == 2:
-        # print(cal())
-        ans = max(ans, cal())
-        # print('==')
+        print(cal())
+        # ans = max(ans, cal())
+        print('==')
         return
 
     for i in range(n):
