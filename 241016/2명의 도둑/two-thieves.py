@@ -58,19 +58,11 @@ def cal():
                 cnt += 1
 
             if cnt == m:
-                # 41 ~ 43이 문제임
-                # while sum(s) > c:
-                #     s.sort()
-                #     s.pop(0)
                 get_new_s(s, 0)
                 
-                print(new_s)
+                for k in range(len(new_s)):
+                    temp += new_s[k] * new_s[k]
 
-                # 으아!!!! maxVal 말고 새로운 s 넘어오게....
-                # print(max_val)
-                for i in range(len(new_s)):
-                    temp += new_s[i] * new_s[i]
-                # print(s)
                 cnt = 0
                 s = []
                 new_s, temp_s = [], []
@@ -83,9 +75,7 @@ ans = -1
 def func(lev):
     global ans
     if lev == 2:
-        print(cal())
-        # ans = max(ans, cal())
-        print('==')
+        ans = max(ans, cal())
         return
 
     for i in range(n):
