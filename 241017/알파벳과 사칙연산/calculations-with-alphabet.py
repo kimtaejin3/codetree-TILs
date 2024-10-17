@@ -5,6 +5,10 @@ n = len(arr_s)
 
 choose = []
 
+if len(s) == 1:
+    print(4)
+    exit(0)
+
 def get_value(opr):
     global choose
     index = -1
