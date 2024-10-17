@@ -1,78 +1,39 @@
-s = input()
-arr_s = s.replace("+","*").replace("-","*").split("*")
-arr_s = list(set(arr_s))
-n = len(arr_s)
+import sys
 
-choose = []
+INT_MIN = -sys.maxsize
 
-if len(s) == 1:
-    print(4)
-    exit(0)
+n = 6
+expression = input()
+num = [0 for _ in range(n)]
+ans = INT_MIN
 
-def get_value(opr):
-    global choose
-    index = -1
-    
-    for i in range(len(arr_s)):
-        if arr_s[i] == opr:
-            index = i
+def conv(idx):
+    return num[ord(expression[idx]) - ord('a')]
 
-    return choose[index]
+def calc():
+    length = len(expression)
+    value = conv(0)
 
-def calc(opr1, opr2, opt):
-    opr1 = get_value(opr1)
-    opr2 = get_value(opr2)
+    for i in range(2, length, 2):
+        if expression[i - 1] == '+':
+            value += conv(i)
+        elif expression[i - 1] == '-':
+            value -= conv(i)
+        else:
+            value *= conv(i)
+        
+    return value
 
-    if opt == "+":
-        return opr1 + opr2
-    elif opt == "*":
-        return opr1 * opr2
-    elif opt == "-":
-        return opr1 - opr2
+def find_max(cnt):
+    global ans
 
-def calc_rest(val, opr2, opt):
-    opr2 = get_value(opr2)
-
-    if opt == "+":
-        return val + opr2
-    elif opt == "*":
-        return val * opr2
-    elif opt == "-":
-        return val - opr2  
-
-def calc_all():
-    temp_s = s
-
-    left_s = temp_s[0:3]
-    temp_s = temp_s[3:]
-    val = 0
-    val = calc(left_s[0], left_s[2], left_s[1])
-
-    while temp_s:
-        left_s = temp_s[:2]
-        temp_s = temp_s[2:]
-
-        opt = left_s[0]
-        opr = left_s[1]
-
-        val = calc_rest(val,opr,opt)
-
-    return val
-
-ans = -1 
-
-def func(idx, lev):
-    global ans, choose
-
-    if lev == n:
-        ans = max(ans,calc_all())
+    if cnt == n:
+        ans = max(ans, calc())
         return
     
-    for i in range(1,5):
-        choose.append(i)
-        func(i+1, lev + 1)
-        choose.pop()
+    for i in range(1, 5):
+        num[cnt] = i
+        find_max(cnt + 1)
 
-func(0, 0)
-
+find_max(0)
 print(ans)
