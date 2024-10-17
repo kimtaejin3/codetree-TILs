@@ -34,6 +34,7 @@ def find_max(cnt):
     for i in range(1, 5):
         num[cnt] = i
         find_max(cnt + 1)
+        num[cnt] = -1
 
 find_max(0)
 print(ans)
