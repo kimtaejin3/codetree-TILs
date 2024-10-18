@@ -7,7 +7,7 @@ def func(lev):
         return
     
     for i in range(1, k+1):
-        if lev == 0 or lev == 1 or not (choose[lev-2] == i and choose[lev-1] == i and choose[lev-1] == choose[lev-2]):
+        if lev == 0 or lev == 1 or not (choose[lev-2] == i and choose[lev-1] == i):
             choose.append(i)
             func(lev + 1)
             choose.pop()
