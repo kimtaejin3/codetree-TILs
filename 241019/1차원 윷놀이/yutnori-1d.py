@@ -4,11 +4,11 @@ choose = []
 # print(arr)
 def calc():
     # print(choose)
-    a = [0 for _ in range(n+1)]
+    a = [1 for _ in range(n+1)]
     
     for i in range(len(choose)):
         a[choose[i]] += arr[i+1]
-    # print(a)
+
     cnt = 0
 
     for el in a:
