@@ -25,7 +25,6 @@ def in_range(x, y):
 
 def move(x, y, depth):
     global ans
-    visited[x][y] = True
     nx, ny = x + dxs[grid_d[x][y] - 1], y + dys[grid_d[x][y] - 1]
 
     while in_range(nx,ny):
