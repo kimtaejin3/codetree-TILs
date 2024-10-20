@@ -13,11 +13,6 @@ grid_d = [
     for _ in range(n)
 ]
 
-visited = [
-    [False for _ in range(n)]
-    for _ in range(n)
-]
-
 r, c = map(int, input().split())
 r, c = r - 1, c - 1
 
@@ -34,7 +29,7 @@ def move(x, y, depth):
     nx, ny = x + dxs[grid_d[x][y] - 1], y + dys[grid_d[x][y] - 1]
 
     while in_range(nx,ny):
-        if grid[x][y] < grid[nx][ny] and not visited[nx][ny]:
+        if grid[x][y] < grid[nx][ny]:
             move(nx, ny, depth + 1)
         
         nx, ny = nx + dxs[grid_d[x][y] - 1], ny + dys[grid_d[x][y] - 1]
