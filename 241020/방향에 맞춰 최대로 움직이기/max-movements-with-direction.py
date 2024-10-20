@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(10**4)
+
 n = int(input())
 
 grid = [
@@ -7,6 +10,11 @@ grid = [
 
 grid_d = [
     list(map(int, input().split()))
+    for _ in range(n)
+]
+
+visited = [
+    [False for _ in range(n)]
     for _ in range(n)
 ]
 
@@ -21,16 +29,17 @@ def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
 def move(x, y, depth):
-
+    global ans
+    visited[x][y] = True
     nx, ny = x + dxs[grid_d[x][y] - 1], y + dys[grid_d[x][y] - 1]
-    
+
     while in_range(nx,ny):
-        if grid[x][y] < grid[nx][ny]:
+        if grid[x][y] < grid[nx][ny] and not visited[nx][ny]:
             move(nx, ny, depth + 1)
         
-        x, y = nx, ny
-        nx, ny = x + dxs[grid_d[x][y] - 1], y + dys[grid_d[x][y] - 1]
+        nx, ny = nx + dxs[grid_d[x][y] - 1], ny + dys[grid_d[x][y] - 1]
 
-    print(depth)
+    ans = max(ans, depth)
 
 move(r, c, 0)
+print(ans)
