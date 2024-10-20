@@ -1,36 +1,39 @@
 n = int(input())
 
-grid = [
+num = [
     list(map(int, input().split()))
     for _ in range(n)
 ]
 
-grid_d = [
+move_dir = [
     list(map(int, input().split()))
     for _ in range(n)
 ]
-
-r, c = map(int, input().split())
-r, c = r - 1, c - 1
-
-dxs, dys = [-1, -1, 0, 1, 1, 1, 0, -1],[0, 1, 1, 1, 0, -1, -1, -1]
 
 ans = 0
 
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
-def move(x, y, depth):
+def can_go(x, y, prev_num):
+    return in_range(x, y) and num[x][y] > prev_num
+
+def find_max(x, y, cnt):
     global ans
-    nx, ny = x + dxs[grid_d[x][y] - 1], y + dys[grid_d[x][y] - 1]
 
-    while in_range(nx,ny):
-        if grid[x][y] < grid[nx][ny]:
-            move(nx, ny, depth + 1)
-        
-        nx, ny = nx + dxs[grid_d[x][y] - 1], ny + dys[grid_d[x][y] - 1]
+    ans = max(ans, cnt)
 
-    ans = max(ans, depth)
+    dxs = [-1, -1, 0, 1, 1, 1, 0, -1]
+    dys = [0, 1, 1, 1, 0, -1, -1, -1]
 
-move(r, c, 0)
+    d = move_dir[x][y] - 1
+
+    for i in range(n):
+        nx, ny = x + dxs[d] * i, y + dys[d] * i
+        if can_go(nx, ny, num[x][y]):
+            find_max(nx, ny, cnt + 1)
+
+r, c = tuple(map(int, input().split()))
+
+find_max(r - 1, c - 1, 0)
 print(ans)
