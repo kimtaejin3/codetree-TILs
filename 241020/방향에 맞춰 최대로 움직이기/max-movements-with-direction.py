@@ -28,7 +28,7 @@ def find_max(x, y, cnt):
 
     d = move_dir[x][y] - 1
 
-    for i in range(n):
+    for i in range(1, n):
         nx, ny = x + dxs[d] * i, y + dys[d] * i
         if can_go(nx, ny, num[x][y]):
             find_max(nx, ny, cnt + 1)
