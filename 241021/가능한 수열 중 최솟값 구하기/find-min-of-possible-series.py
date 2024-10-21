@@ -8,11 +8,11 @@ def check():
     s = ''.join(map(str, choose))
 
     for k in range(1, n//2+1):
-        for i in range(len(s)-1):
+        for i in range(len(s)-k):
             if i+k*2 > n:
                 continue
-            print('s:',s)
-            print('temp:',s[i:i+k], s[i+k:i+k*2])
+            # print('s:',s)
+            # print('temp:',s[i:i+k], s[i+k:i+k*2])
             if s[i:i+k] == s[i+k: i+k*2]:
                 return True
 
