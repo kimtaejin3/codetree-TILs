@@ -22,8 +22,10 @@ def func(lev):
     global ans
 
     if lev == n:
-        if not check() and not ans:
+        if not check():
             ans = ''.join(map(str, choose))
+            print(ans)
+            exit(0)
         return
 
     for i in range(len(nums)):
@@ -32,4 +34,3 @@ def func(lev):
         choose.pop()
 
 func(0)
-print(ans)
