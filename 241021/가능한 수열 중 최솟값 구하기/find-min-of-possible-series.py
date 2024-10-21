@@ -9,7 +9,7 @@ def check():
 
     for k in range(1, n//2+1):
         for i in range(len(s)-k):
-            if i+k*2 >= n:
+            if i+k*2 > n:
                 continue
             # print('s:',s)
             # print('temp:',s[i:i+k], s[i+k:i+k*2])
