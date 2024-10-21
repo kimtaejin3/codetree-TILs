@@ -25,6 +25,9 @@ def func(lev):
         if not check():
             ans = ''.join(map(str, choose))
             print(ans)
+
+            #이렇게 하니까 20%까지는 갔음.
+            #다 구해놓고 하는 방식이 아니라 조건에 맞지 않을시 재귀를 하면 안될 것 같음.
             exit(0)
         return
 
