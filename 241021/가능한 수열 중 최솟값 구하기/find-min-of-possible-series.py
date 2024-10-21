@@ -24,8 +24,8 @@ def func(lev):
     global ans
     
     if lev == n:
-        print('choose:',choose)
-        return
+        print(''.join(map(str, choose)))
+        exit(0)
 
     for i in range(len(nums)):
         choose.append(nums[i])
