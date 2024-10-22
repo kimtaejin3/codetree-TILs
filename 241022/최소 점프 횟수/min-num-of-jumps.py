@@ -32,4 +32,7 @@ def search(lev):
 
 search(0)
 
-print(ans)
+if ans == sys.maxsize:
+    print(-1)
+else:
+    print(ans)
