@@ -20,8 +20,9 @@ def search(lev):
     global ans
 
     if lev == n:
-        if choose and choose[0][0] == a[0] and choose[-1][0] == a[-1] and isPossible():
+        if choose and choose[0][0] == a[0] and choose[-1][0] == a[-1] and isPossible() and choose[0][1] == 0 and choose[-1][1] == n - 1:
             ans = min(ans, len(choose)-1)
+            # print(choose)
         return
 
     choose.append((a[lev], lev))
