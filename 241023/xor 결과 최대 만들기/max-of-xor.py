@@ -9,7 +9,7 @@ def choose(lev, cnt):
 
     if lev == n:
         if cnt == m:
-            val = 1
+            val = 0
             for elem in answer:
                 val = val | elem
             ans = max(val, ans)
