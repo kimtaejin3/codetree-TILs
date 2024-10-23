@@ -11,7 +11,7 @@ def choose(lev, cnt):
         if cnt == m:
             val = 0
             for elem in answer:
-                val = val | elem
+                val = val ^ elem
             ans = max(val, ans)
         return
 
