@@ -1,0 +1,23 @@
+n, m = map(int, input().split())
+arr = list(map(int, input().split()))
+answer = []
+
+ans = 0
+
+def choose(lev, cnt):
+    global ans 
+    
+    if lev == n:
+        if cnt == m:
+            ans = max(answer[0] | answer[1] | answer[2], ans)
+        return
+
+    answer.append(arr[lev])
+    choose(lev+1, cnt+1)
+    answer.pop()
+
+    choose(lev+1, cnt)
+
+choose(0,0)
+
+print(ans)
