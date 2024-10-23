@@ -1,64 +1,68 @@
 import sys
+
+COIN_NUM = 9
+INT_MAX = sys.maxsize
+
 n = int(input())
+m = 3
 
 grid = [
-    list(input())
+    input()
     for _ in range(n)
 ]
 
-nums = []
+coin_pos = list()
+selected_pos = list()
 
-def get_idx():
-    start = -1
-    end = -1
+start_pos = (-1, -1)
+end_pos = (-1, -1)
 
-    for x in range(n):
-        for y in range(n):
-            if grid[x][y] == 'S':
-                start = (x,y)
-            elif grid[x][y] == 'E':
-                end = (x,y)
-            elif grid[x][y].isnumeric():
-                nums.append((int(grid[x][y]),(x,y)))
-    
-    return start, end
+ans = INT_MAX
 
-choose = []
-start_idx, end_idx = get_idx()
+def dist(a, b):
+    (ax, ay), (bx, by) = a, b
+    return abs(ax - bx) + abs(ay - by)
 
-def get_dis(a, b):
-    x1, y1 = a
-    x2, y2 = b
+def calc():
+    num_moves = dist(start_pos, selected_pos[0])
+    for i in range(m - 1):
+        num_moves += dist(selected_pos[i], selected_pos[i+1])
+    num_moves += dist(selected_pos[m - 1], end_pos)
 
-    return abs(x1 - x2) + abs(y1 - y2)
+    return num_moves
 
-def get_dis_all(arr):
-
-    d1 = get_dis(start_idx, arr[0][1])
-    d2 = get_dis(arr[0][1], arr[1][1])
-    d3 = get_dis(arr[1][1], arr[2][1])
-    d4 = get_dis(arr[2][1], end_idx)
-
-    return d1 + d2 + d3 + d4
-
-ans = sys.maxsize
-
-def f(index, lev):
+def find_min_moves(curr_idx, cnt):
     global ans
-    if lev == 3:
-        candidate = choose[:]
-        candidate.sort()
-        ans = min(get_dis_all(candidate[:]), ans)
+
+    if cnt == m:
+        ans = min(ans, calc())
         return
     
-    for i in range(index, len(nums)):
-        choose.append(nums[i])
-        f(i+1, lev + 1)
-        choose.pop()
+    if curr_idx == len(coin_pos):
+        return
+    
+    find_min_moves(curr_idx + 1, cnt)
 
-f(0,0)
+    selected_pos.append(coin_pos[curr_idx])
+    find_min_moves(curr_idx + 1, cnt + 1)
+    selected_pos.pop()
 
-if ans == sys.maxsize:
-    print(-1)
-else:
-    print(ans)
+for i in range(n):
+    for j in range(n):
+        if grid[i][j] == 'S':
+            start_pos = (i, j)
+        if grid[i][j] == 'E':
+            end_pos = (i, j)
+
+for num in range(1, COIN_NUM + 1):
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == str(num):
+                coin_pos.append((i, j))
+
+find_min_moves(0, 0)
+
+if ans == INT_MAX:
+    ans = -1
+
+print(ans)
