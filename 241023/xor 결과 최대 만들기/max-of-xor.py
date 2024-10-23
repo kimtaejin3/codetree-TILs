@@ -6,10 +6,13 @@ ans = 0
 
 def choose(lev, cnt):
     global ans 
-    
+
     if lev == n:
         if cnt == m:
-            ans = max(answer[0] | answer[1] | answer[2], ans)
+            val = 0
+            for elem in answer:
+                val = val | elem
+            ans = max(val, ans)
         return
 
     answer.append(arr[lev])
