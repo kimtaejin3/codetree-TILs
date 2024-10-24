@@ -1,47 +1,39 @@
 import sys
-import math
 
 INT_MAX = sys.maxsize
 
-n, m = map(int, input().split())
+n, m = tuple(map(int, input().split()))
+points = [
+    tuple(map(int, input().split()))
+    for _ in range(n)
+]
+selected_points = list()
 
-arr = []
 ans = INT_MAX
-for _ in range(n):
-    arr.append(tuple(map(int, input().split())))
 
-candidate = []
+def dist(p1, p2):
+    (x1, y1), (x2, y2) = p1, p2
+    return (x1 - x2) ** 2 + (y1 - y2) ** 2
 
-def get_dis(a, b):
-    ax, ay = a
-    bx, by = b
+def calc():
+    return max([
+        dist(p1, p2)
+        for i, p1 in enumerate(selected_points)
+        for j, p2 in enumerate(selected_points)
+        if i != j
+    ])
 
-    return int(math.pow(abs(ax-bx),2) + math.pow(abs(ay - by),2))
+def find_min(idx, cnt):
 
-def choose(lev, cnt):
-    global ans
     if cnt == m:
-        # here
-        temp = -1
-
-        for i in range(len(candidate)):
-            for j in range(len(candidate)):
-                if i == j:
-                    continue
-
-                temp = max(temp, get_dis(candidate[i], candidate[j]))
-
-        # print(temp)
-        ans = min(ans, temp)
+        ans = min(ans, calc())
         return
-    if lev == n:
+    
+    if idx == n:
         return
 
-    candidate.append(arr[lev])
-    choose(lev + 1, cnt + 1)
-    candidate.pop()
+    selected_points.append(points[idx])
+    find_min(idx + 1, cnt + 1)
+    selected_points.pop()
 
-    choose(lev + 1, cnt)
-
-choose(0, 0)
-print(ans)
+    find_min(idx + 1, cnt)
