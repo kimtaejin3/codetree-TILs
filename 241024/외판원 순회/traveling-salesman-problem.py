@@ -1,41 +1,51 @@
 import sys
 
 INT_MAX = sys.maxsize
+
 n = int(input())
-A = [
-    [0]+ list(map(int, input().split()))
+
+cost = [
+    list(map(int, input().split()))
     for _ in range(n)
 ]
 
-A.insert(0, [0 for _ in range(n+1)])
+visited = [False] * n
+picked = []
 
-visited = [False] * (n + 1)
-choose = []
 ans = INT_MAX
-def perm(lev):
-    global ans
-    if lev == n - 1:
-        temp = A[1][choose[0]]
-        if temp == 0:
-            return
-        for i in range(len(choose)-1):
-            if A[choose[i]][choose[i+1]] == 0:
-                return 
 
-            temp += A[choose[i]][choose[i+1]]
-        if A[choose[-1]][1] == 0:
+def find_min(cnt):
+    global ans
+
+    if cnt == n:
+        total_cost = 0
+        for i in range(n-1):
+            curr_cost = cost[picked[i]][picked[i + 1]]
+            if curr_cost == 0:
+                return
+            
+            total_cost += curr_cost
+
+        additional_cost = cost[picked[-1]][0]
+        if additional_cost == 0:
             return
-        temp += A[choose[-1]][1]
-        # print(temp, choose)
-        ans = min(ans, temp)
+        
+        ans = min(ans, total_cost + additional_cost)
         return
     
-    for i in range(2, n + 1):
-        if not visited[i]:
-            visited[i] = True
-            choose.append(i)
-            perm(lev + 1)
-            choose.pop()
-            visited[i] = False
-perm(0)
+    for i in range(n):
+        if visited[i]:
+            continue
+        
+        visited[i] = True
+        picked.append(i)
+
+        find_min(cnt + 1)
+
+        visited[i] = False
+        picked.pop()
+
+visited[0] = True
+picked.append(0)
+find_min(1)
 print(ans)
