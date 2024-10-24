@@ -22,8 +22,17 @@ def choose(lev, cnt):
     global ans
     if cnt == m:
         # here
-        candidate.sort()
-        ans = min(ans, get_dis(candidate[0], candidate[-1]))
+        temp = -1
+
+        for i in range(len(candidate)):
+            for j in range(len(candidate)):
+                if i == j:
+                    continue
+
+                temp = max(temp, get_dis(candidate[i], candidate[j]))
+
+        # print(temp)
+        ans = min(ans, temp)
         return
     if lev == n:
         return
