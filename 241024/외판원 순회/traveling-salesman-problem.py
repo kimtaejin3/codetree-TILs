@@ -16,10 +16,17 @@ def perm(lev):
     global ans
     if lev == n - 1:
         temp = A[1][choose[0]]
+        if temp == 0:
+            return
         for i in range(len(choose)-1):
-            temp += A[choose[i]][choose[i+1]]
-        temp += A[choose[-1]][1]
+            if A[choose[i]][choose[i+1]] == 0:
+                return 
 
+            temp += A[choose[i]][choose[i+1]]
+        if A[choose[-1]][1] == 0:
+            return
+        temp += A[choose[-1]][1]
+        # print(temp, choose)
         ans = min(ans, temp)
         return
     
