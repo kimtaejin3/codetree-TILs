@@ -27,7 +27,7 @@ def dfs(x, y):
             visited[nx][ny] = True
             people += 1
             dfs(nx, ny)
-            
+
 towns = 0
 peoples = []
 
@@ -35,12 +35,11 @@ for i in range(n):
     for j in range(n):
         if grid[i][j] == 1 and not visited[i][j]:
             towns += 1
-            people = 0
-
+            people = 1
+            visited[i][j] = True
             dfs(i, j)
 
-            if people > 0:
-                peoples.append(people)
+            peoples.append(people)
 
 
 print(towns)
