@@ -20,10 +20,13 @@ def dfs(x, y):
     for dx, dy in zip(dxs, dys):
         next_x, next_y = x + dx, y + dy
         
+        if not in_range(next_x, next_y):
+            continue
+
         if visited[next_x][next_y]:
             continue
         
-        if in_range(next_x, next_y) and grid[next_x][next_y] == 0:
+        if grid[next_x][next_y] == 0:
             visited[next_x][next_y] = True
             dfs(next_x, next_y)
 
