@@ -26,7 +26,7 @@ def dfs(x, y):
         if visited[next_x][next_y]:
             continue
         
-        if grid[next_x][next_y] == 0:
+        if grid[next_x][next_y] == 1:
             visited[next_x][next_y] = True
             dfs(next_x, next_y)
 
