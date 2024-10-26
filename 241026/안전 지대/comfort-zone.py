@@ -1,5 +1,5 @@
-# import sys
-# sys.setrecursionlimit(10**7)
+import sys
+sys.setrecursionlimit(10**5)
 
 N, M = map(int, input().split())
 
