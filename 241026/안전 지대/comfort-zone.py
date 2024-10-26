@@ -38,7 +38,7 @@ def dfs(x, y, k):
 ans_safe_area_cnt = -1
 ans_k = -1
 
-for k in range(1, max_val):
+for k in range(1, max_val+1):
     
     safe_area_cnt = 0
     
