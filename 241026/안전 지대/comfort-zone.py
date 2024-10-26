@@ -1,9 +1,17 @@
+# import sys
+# sys.setrecursionlimit(10**7)
+
 N, M = map(int, input().split())
 
 grid = [
     list(map(int, input().split()))
     for _ in range(N)
 ]
+
+max_val = -1
+
+for row in grid:
+    max_val = max(max_val, max(row))
 
 temp_ans = 0
 
@@ -30,7 +38,7 @@ def dfs(x, y, k):
 ans_safe_area_cnt = -1
 ans_k = -1
 
-for k in range(1, 101):
+for k in range(1, max_val):
     
     safe_area_cnt = 0
     
