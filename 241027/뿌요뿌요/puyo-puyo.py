@@ -30,8 +30,8 @@ for x in range(n):
         if not visited[x][y]:
             block_cnt_per_one = 1
             visited[x][y] = True
-            dfs(0, 0)
-
+            dfs(x, y)
+            
             if block_cnt_per_one >= 4:
                 block_cnt += 1
         
