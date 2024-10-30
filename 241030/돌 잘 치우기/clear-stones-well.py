@@ -1,98 +1,90 @@
 from collections import deque
 
 n, k, m = tuple(map(int, input().split()))
-
-grid = [
+a = [
     list(map(int, input().split()))
     for _ in range(n)
 ]
 
-start_positions = []
+ans = 0
+s_pos = []
+stone_pos = [
+    (i, j)
+    for i in range(n)
+    for j in range(n)
+    if a[i][j] == 1
+]
 
-for _ in range(k):
-    r, c = map(int, input().split())
-    start_positions.append((r-1, c-1))
+selected_stones = []
 
+q = deque()
 visited = [
     [False for _ in range(n)]
     for _ in range(n)
 ]
 
-def init_visited():
-    for i in range(n):
-        for j in range(n):
-            visited[i][j] = False
-
-stone_positions = []
-
-for i in range(n):
-    for j in range(n):
-        if grid[i][j] == 1:
-            stone_positions.append((i, j))
-
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
-def bfs():
-    q = deque(start_positions)
-    
-    dxs, dys = [1, -1, 0, 0], [0, 0, -1, 1]
+def can_go(x, y):
+    return in_range(x, y) and not a[x][y] and not visited[x][y]
 
+def bfs():
     while q:
         x, y = q.popleft()
-        visited[x][y] = True
 
+        dxs, dys = [1, -1, 0, 0], [0, 0, 1, -1]
+        
         for dx, dy in zip(dxs, dys):
             nx, ny = x + dx, y + dy
 
-            if in_range(nx, ny) and grid[nx][ny] == 0 and not visited[nx][ny]:
-                visited[nx][ny] = True
+            if can_go(nx, ny):
                 q.append((nx, ny))
+                visited[nx][ny] = True
 
-choose = []
-c_selected = []
-def select_m(lev, cnt):
-    global selected
+def calc():
+    for x, y in selected_stones:
+        a[x][y] = 0
+    
+    for i in range(n):
+        for j in range(n):
+            visited[i][j] = False
+    
+    for x, y in s_pos:
+        q.append((x, y))
+        visited[x][y] = True
+    
+    bfs()
 
-    if cnt == m:
-        c_selected.append(choose[:])
+    for x, y in selected_stones:
+        a[x][y] = 1
+
+    cnt = 0
+
+    for i in range(n):
+        for j in range(n):
+            if visited[i][j]:
+                cnt += 1
+    
+    return cnt
+
+def find_max(idx, cnt):
+    global ans
+
+    if idx == len(stone_pos):
+        if cnt == m:
+            ans = max(ans, calc())
         return
     
-    if lev == len(stone_positions):
-        return
-    
-    choose.append(stone_positions[lev])
-    select_m(lev + 1, cnt + 1)
+    selected_stones.append(stone_pos[idx])
+    find_max(idx + 1, cnt + 1)
+    selected_stones.pop()
 
-    choose.pop()
-    select_m(lev + 1, cnt)
-
-ans = -1
-def move():
-    global c_selected, ans
-    c_selected = []
-    select_m(0, 0)
-
-    for s in c_selected:
-
-        for ss in s:
-            x, y = ss
-            grid[x][y] = 0
-
-        init_visited()
+    find_max(idx + 1, cnt)
         
-        bfs()
+for _ in range(k):
+    r, c = tuple(map(int, input().split()))
+    s_pos.append((r-1, c-1))
 
-        cnt = 0
-        for i in range(n):
-            for j in range(n):
-                if visited[i][j]:
-                    cnt += 1
-        ans = max(ans, cnt)
-        for ss in s:
-            x, y = ss
-            grid[x][y] = 1
-    
-
-move()
+find_max(0,0)
 print(ans)
