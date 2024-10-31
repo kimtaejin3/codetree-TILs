@@ -48,7 +48,7 @@ def melt():
 ans = 0
 t = 0
 for i in range(n):
-    for j in range(n):
+    for j in range(m):
         if grid[i][j] == 1:
             ans += 1
 
