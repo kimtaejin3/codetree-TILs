@@ -45,8 +45,13 @@ def melt():
     
    
 
-ans = -1
+ans = 0
 t = 0
+for i in range(n):
+    for j in range(n):
+        if grid[i][j] == 1:
+            ans += 1
+
 def melt_all():
     global ans, t
 
