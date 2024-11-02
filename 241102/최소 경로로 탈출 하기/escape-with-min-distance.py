@@ -13,7 +13,7 @@ steps = [
 ]
 
 def can_go(x, y):
-    return in_range(x, y) and steps[x][y] == 0 and grid[x][y] == 1
+    return in_range(x, y) and steps[x][y] == -1 and grid[x][y] == 1
 
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < m
