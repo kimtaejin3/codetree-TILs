@@ -14,19 +14,17 @@ steps = [
     [0 for _ in range(n)]
     for _ in range(n)
 ]
-answer = [
-    [0 for _ in range(n)]
-    for _ in range(n)
-]
 
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
 
-def bfs(x, y):
+def bfs(shelters):
     dxs, dys = [-1, 1, 0, 0], [0, 0, -1, 1]
 
-    q = deque([(x, y)])
-    visited[x][y] = True
+    for x, y in shelters:
+        visited[x][y] = True
+
+    q = deque(shelters[:])
 
     while q:
         x, y = q.popleft()
@@ -39,32 +37,27 @@ def bfs(x, y):
                 steps[nx][ny] = steps[x][y] + 1
                 q.append((nx, ny))
 
-def simulate(x, y):
-    for i in range(n):
-        for j in range(n):
-            visited[i][j] = False
-            steps[i][j] = 0
-    
-    bfs(x, y)
-    
-    temp_results = []
+def simulate():
+    shelters = []
 
     for i in range(n):
         for j in range(n):
-            if grid[i][j] == 3 and steps[i][j] != 0:
-                temp_results.append(steps[i][j])
+            if grid[i][j] == 3:
+                shelters.append((i, j))
     
-    if len(temp_results) == 0:
-        answer[x][y] = -1
-    else:
-        answer[x][y] = min(temp_results)
-    
+    bfs(shelters)
+
+simulate()
+
 for i in range(n):
     for j in range(n):
         if grid[i][j] == 2:
-            simulate(i, j)
+            if steps[i][j] == 0:
+                print(-1, end=' ')
+            else:
+                print(steps[i][j], end=' ')
 
-for i in range(n):
-    for j in range(n):
-        print(answer[i][j], end=' ')
+        else:
+            print(0, end=' ')
+
     print()
