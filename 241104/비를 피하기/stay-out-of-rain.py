@@ -34,7 +34,7 @@ def bfs(x, y):
         for dx, dy in zip(dxs, dys):
             nx, ny = x + dx, y + dy
 
-            if in_range(nx, ny) and not visited[nx][ny] and (grid[nx][ny] == 0 or grid[nx][ny] == 3):
+            if in_range(nx, ny) and not visited[nx][ny] and (grid[nx][ny] != 1):
                 visited[nx][ny] = True
                 steps[nx][ny] = steps[x][y] + 1
                 q.append((nx, ny))
@@ -46,15 +46,25 @@ def simulate(x, y):
             steps[i][j] = 0
     
     bfs(x, y)
+    
+    temp_results = []
 
     for i in range(n):
         for j in range(n):
-            print(steps[i][j], end=' ')
-        print()
+            if grid[i][j] == 3 and steps[i][j] != 0:
+                temp_results.append(steps[i][j])
     
-    print('== == == ==')
+    if len(temp_results) == 0:
+        answer[x][y] = -1
+    else:
+        answer[x][y] = min(temp_results)
     
 for i in range(n):
     for j in range(n):
         if grid[i][j] == 2:
             simulate(i, j)
+
+for i in range(n):
+    for j in range(n):
+        print(answer[i][j], end=' ')
+    print()
