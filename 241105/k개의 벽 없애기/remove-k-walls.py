@@ -1,5 +1,4 @@
 from collections import deque
-import sys
 
 n, k = map(int, input().split())
 
@@ -9,7 +8,7 @@ grid = [
 ]
 
 steps = [
-    [sys.maxsize for _ in range(n)]
+    [-1 for _ in range(n)]
     for _ in range(n)
 ]
 
@@ -26,7 +25,7 @@ len_walls = len(walls)
 def initialize_steps():
     for i in range(n):
         for j in range(n):
-            steps[i][j] = sys.maxsize
+            steps[i][j] = -1
 
 def in_range(x, y):
     return 0 <= x < n and 0 <= y < n
@@ -42,7 +41,7 @@ def bfs():
         for dx, dy in zip(dxs, dys):
             nx, ny = x + dx, y + dy
 
-            if in_range(nx, ny) and steps[nx][ny] == sys.maxsize and grid[nx][ny] == 0:
+            if in_range(nx, ny) and steps[nx][ny] == -1 and grid[nx][ny] == 0:
                 steps[nx][ny] = steps[x][y] + 1
                 q.append((nx, ny))
 
@@ -65,12 +64,12 @@ def simulate():
     
     return ans
 
-ans = sys.maxsize
+ans = -1
 def select_walls(lev, cnt):
     global ans
     
     if cnt == k:
-        ans = min(ans, simulate())
+        ans = max(ans, simulate())
         return
 
     if lev == len_walls:
@@ -84,7 +83,4 @@ def select_walls(lev, cnt):
 
 select_walls(0, 0)
 
-if ans == sys.maxsize:
-    print(-1)
-else:
-    print(ans)
+print(ans)
