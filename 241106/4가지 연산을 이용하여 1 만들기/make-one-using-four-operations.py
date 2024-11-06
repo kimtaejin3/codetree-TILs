@@ -4,6 +4,10 @@ from collections import deque
 N = int(input())
 visited = [False for _ in range(1000001)]
 
+if N == 1:
+    print(0)
+    exit(0)
+
 def bfs():
     q = deque([(N, 1)])
     visited[N] = True
