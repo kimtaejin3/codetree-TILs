@@ -2,7 +2,7 @@
 from collections import deque
 
 N = int(input())
-visited = [False for _ in range(1000001)]
+visited = [False for _ in range(N*2 + 1)]
 
 if N == 1:
     print(0)
@@ -19,9 +19,15 @@ def bfs():
             next_num = -1
 
             if i == 0:
-                next_num = num + 1
+                if num < N * 2:
+                    next_num = num + 1
+                else:
+                    continue
             elif i == 1:
-                next_num = num - 1
+                if num > 1:
+                    next_num = num - 1
+                else:
+                    continue
             elif i == 2 and num % 2 == 0:
                 next_num = num // 2
             elif i == 3 and num % 3 == 0:
