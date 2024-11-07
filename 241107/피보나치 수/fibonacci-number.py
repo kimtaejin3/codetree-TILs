@@ -7,7 +7,8 @@ def fibo(N):
     if memo[N] != -1:
         return memo[N]
     
-    return fibo(N - 1) + fibo(N - 2)
+    memo[N] = fibo(N - 1) + fibo(N - 2)
+    return memo[N]
 
 N = int(input())
 memo = [-1] * (N + 1)
