@@ -5,7 +5,9 @@ memo = [-1] * (MAX_N + 1)
 def climb(N):
     if N == 2 or N == 3:
         return 1
-    
+    if N == 1:
+        return 0
+        
     if memo[N] != -1:
         return memo[N]
     
