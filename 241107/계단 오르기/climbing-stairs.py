@@ -1,12 +1,15 @@
 MAX_N = 1000
 
-dp = [0] * (MAX_N + 1)
+memo = [-1] * (MAX_N + 1)
 
-dp[2] = 1
-dp[3] = 1
+def climb(N):
+    if N == 2 or N == 3:
+        return 1
+    
+    memo[N] = (climb(N - 2) + climb(N - 3)) % 10007
 
-for i in range(4, MAX_N + 1):
-    dp[i] = (dp[i - 2] + dp[i - 3]) % 10007
+    return memo[N]
 
 n = int(input())
-print(dp[n])
+ans = climb(n)
+print(ans)
