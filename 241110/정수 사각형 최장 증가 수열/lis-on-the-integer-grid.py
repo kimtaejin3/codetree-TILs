@@ -1,40 +1,53 @@
 n = int(input())
 
 num = [
-    [0] + list(map(int, input().split()))
+    list(map(int, input().split()))
     for _ in range(n)
 ]
 
-num.insert(0, [0 for _ in range(n + 1)])
-
 dp = [
-    [1 for _ in range(n + 1)]
-    for _ in range(n + 1)
+    [-1 for _ in range(n)]
+    for _ in range(n)
 ]
 
 dxs, dys = [-1, 1, 0, 0], [0, 0, -1, 1]
 
 def in_range(x, y):
-    return 1 <= x < n + 1 and 1 <= y < n + 1
+    return 0 <= x < n and 0 <= y < n
 
-for x in range(1, n+1):
-    for y in range(1, n+1):
-        for dx, dy in zip(dxs, dys):
-            prev_x, prev_y = x + dx, y + dy
+def init_dp():
+    for i in range(n):
+        for j in range(n):
+            dp[i][j] = -1
 
-            if in_range(prev_x, prev_y):
-                if num[prev_x][prev_y] < num[x][y]:
-                    dp[x][y] = max(dp[prev_x][prev_y] + 1, dp[x][y])
+def find_max(x, y):
+    if dp[x][y] != -1:
+        return dp[x][y]
 
+    can_go = False
+    for dx, dy in zip(dxs, dys):
+        prev_x, prev_y = x + dx, y + dy
+        
+        if in_range(prev_x, prev_y) and num[x][y] > num[prev_x][prev_y]:
+            dp[x][y] = max(dp[x][y], find_max(prev_x, prev_y) + 1)
+            can_go = True
+    
+    if not can_go:
+        return 1
+    else:
+        return dp[x][y]
 
-# for row in dp:
-#     for elem in row:
-#         print(elem, end=' ')
-#     print()
+ans = -1
+for x in range(n):
+    for y in range(n):
+        init_dp()
+        find_max(x, y)
 
-ans = -1 
-for x in range( n+1):
-    for y in range( n+1):
-        ans = max(ans, dp[x][y])
+        max_val = -1
+        for row in dp:
+            for elem in row:
+                max_val = max(max_val, elem)
+
+        ans = max(ans, max_val)
 
 print(ans)
