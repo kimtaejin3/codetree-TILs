@@ -40,7 +40,6 @@ def find_max(x, y):
 ans = -1
 for x in range(n):
     for y in range(n):
-        init_dp()
         find_max(x, y)
 
         max_val = -1
