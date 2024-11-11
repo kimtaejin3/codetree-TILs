@@ -24,21 +24,22 @@ def find_max(x, y):
     if dp[x][y] != -1:
         return dp[x][y]
 
-    best = 1
-
+    can_go = False
     for dx, dy in zip(dxs, dys):
-        nx, ny = x + dx, y + dy
+        prev_x, prev_y = x + dx, y + dy
         
-        if in_range(nx, ny) and num[x][y] < num[nx][ny]:
-            best = max(best, find_max(nx, ny) + 1)
+        if in_range(prev_x, prev_y) and num[x][y] > num[prev_x][prev_y]:
+            dp[x][y] = max(dp[x][y], find_max(prev_x, prev_y) + 1)
             can_go = True
     
-    dp[x][y] = best
-    return dp[x][y]
+    if not can_go:
+        return 1
+    else:
+        return dp[x][y]
 
 ans = -1
 for x in range(n):
     for y in range(n):
-        ans = max(ans, find_max(x, y))
+        ans = max(ans, find_max(x,y))
 
 print(ans)
