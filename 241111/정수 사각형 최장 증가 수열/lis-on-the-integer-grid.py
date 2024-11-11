@@ -39,13 +39,6 @@ def find_max(x, y):
 ans = -1
 for x in range(n):
     for y in range(n):
-        find_max(x, y)
-
-        max_val = -1
-        for row in dp:
-            for elem in row:
-                max_val = max(max_val, elem)
-
-        ans = max(ans, max_val)
+        ans = max(ans, find_max(x, y))
 
 print(ans)
