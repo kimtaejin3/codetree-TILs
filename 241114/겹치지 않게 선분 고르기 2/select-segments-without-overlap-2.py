@@ -4,6 +4,8 @@ c = []
 for _ in range(n):
     c.append(tuple(map(int, input().split())))
 
+c.sort(key = lambda x:(x[1], x[0]))
+
 dp = [0] * n
 
 dp[0] = 1
