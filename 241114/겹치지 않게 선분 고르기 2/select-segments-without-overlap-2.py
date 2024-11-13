@@ -1,22 +1,17 @@
-#그리디
 n = int(input())
-
 c = []
+
 for _ in range(n):
     c.append(tuple(map(int, input().split())))
 
-c.sort(key = lambda x : (x[1], x[0]))
+dp = [0] * n
 
-cnt = 1
+dp[0] = 1
 
-s, e = c[0]
-for i in range(1, len(c)):
-    s_t, e_t = c[i]
+for i in range(1, n):
+    for j in range(i):
+        if c[i][0] >= c[j][1]:
+            dp[i] = max(dp[i], dp[j] + 1)
 
-    if s_t >= e:
-        s = s_t
-        e = e_t
-        cnt += 1
-
-print(cnt)
+print(max(dp))
 
