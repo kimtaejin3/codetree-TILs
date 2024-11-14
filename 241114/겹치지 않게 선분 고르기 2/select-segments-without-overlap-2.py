@@ -5,7 +5,7 @@ c = []
 for _ in range(n):
     c.append(tuple(map(int, input().split())))
 
-c.sort(key = lambda x : (x[1], x[0]))
+c.sort(key = lambda x : (x[0], x[1]))
 
 cnt = 1
 
