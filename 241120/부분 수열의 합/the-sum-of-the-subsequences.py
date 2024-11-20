@@ -1,24 +1,19 @@
+import sys
+INT_MAX = sys.maxsize
+
 n, m = map(int, input().split())
 A = list(map(int, input().split()))
 
-choose = []
+dp = [INT_MAX] * (m + 1)
 
-ans = 'No'
+dp[0] = 0
 
-def find(lev):
-    global ans
+for i in range(len(A)):
+    for j in range(m, -1, -1):
+        if j - A[i] >= 0:
+            dp[j] = min(dp[j], dp[j - A[i]] + 1)
 
-    if lev == n:
-        if sum(choose) == m:
-            ans = 'Yes'
-        
-        return
-
-    choose.append(A[lev])
-    find(lev + 1)
-    choose.pop()
-    find(lev + 1)
-
-find(0)
-
-print(ans)
+if dp[m] == INT_MAX:
+    print('No')
+else:
+    print('Yes')
