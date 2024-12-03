@@ -15,9 +15,8 @@ dp = [
 
 dp[0][0] = 0
 
-if N > 1:
-    dp[1][0] = arr[1][1]
-    dp[1][1] = arr[1][0]
+dp[1][0] = arr[1][1]
+dp[1][1] = arr[1][0]
 
 for i in range(2, 2 * N + 1):
     for j in range(N + 1):
