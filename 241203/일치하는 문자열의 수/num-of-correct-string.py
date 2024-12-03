@@ -5,7 +5,7 @@ arr = []
 for _ in range(n):
     arr.append(input())
 
-for i in range(n):
+for i in range(n - 1, -1 , -1):
     if arr[i] == s:
         print(i)
         break
