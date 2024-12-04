@@ -3,5 +3,5 @@ a = float(input())
 b = float(input())
 
 print(c)
-print(round(a,2))
-print(round(b,2))
+print(format(a, ".2f"))
+print(format(b, ".2f"))
